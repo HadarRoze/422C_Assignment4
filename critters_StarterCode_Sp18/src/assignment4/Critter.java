@@ -212,6 +212,34 @@ public abstract class Critter {
 	}
 	
 	public static void displayWorld() {
-		// Complete this method.
+		// Complete this method
+		// create parameters for the grid
+		int height = Params.world_height + 2;
+		int width = Params.world_width + 2;
+		boolean colEnd;
+		boolean rowEnd; // these will hold values of whether the current point is at the end of the world or not
+		String[][] viewedWorld = new String[height][width];
+		// go thru population and mark them on the map
+		for(Critter crit: population) {
+			viewedWorld[crit.y_coord+1][crit.x_coord+1] = crit.toString();
+		}
+		// go thru entire world, replace content if needed, and print
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				colEnd = ((x == 0)||(x == width-1));
+				rowEnd = ((y == 0)||(y == height-1)); // determine whether the point is on the borders of the world
+				
+				if(colEnd&&rowEnd) {
+					viewedWorld[y][x] = "+";
+				} else if(colEnd) {
+					viewedWorld[y][x] = "|";
+				} else if(rowEnd) {
+					viewedWorld[y][x] = "-";
+				} else if(viewedWorld[y][x] == "") { // i think this is the default but it might not be
+					viewedWorld[y][x] = " ";
+				}
+			}
+			System.out.println(viewedWorld[y]); // did they mean print or just out? need to check this
+		}
 	}
 }
