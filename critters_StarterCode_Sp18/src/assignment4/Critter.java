@@ -52,14 +52,68 @@ public abstract class Critter {
 	//private int x_coord;
 	//private int y_coord;
 	//Step 6 has us randomly set the location
-	private int x_coord = rand.nextInt(Params.world_height);
-	private int y_coord = rand.nextInt(Params.world_width);
+	private int x_coord = rand.nextInt(Params.world_width);
+	private int y_coord = rand.nextInt(Params.world_height);
 	
+	//Step 8
+	private final void movement(int direction, int distance, int cost) {
+		// Assumption: If you do not have the energy to walk or you try to walk into a wall, you do not walk
+		// Assumption: If you cannot complete the move, you do not move
+		if(energy >= cost) {
+			int tempx = x_coord;
+			int tempy = y_coord; 
+			switch(direction) {
+					
+				case 0: if(x_coord < (Params.world_width-(distance+1))) {													//Right
+							x_coord += distance;
+						}break;
+								
+				case 1: if(x_coord < (Params.world_width-(distance+1)) && y_coord >= distance) {							//Right, Up
+							x_coord += distance;
+							y_coord -= distance;
+						}break;
+								
+				case 2: if(y_coord >= distance) {																			//Up
+							y_coord -= distance;
+						}break;
+								
+				case 3: if(x_coord >= distance && y_coord >= distance) {													//Left, Up
+							x_coord -= distance;
+							y_coord -= distance;
+						}break;
+								
+				case 4: if(x_coord >= distance) {																			//Left
+							x_coord -= distance;
+						}break;
+								
+				case 5: if(x_coord >= distance && y_coord < (Params.world_height-(distance+1))) {							//Left, Down
+							x_coord -= distance;
+							y_coord += distance;
+						}break;
+						
+				case 6: if(y_coord < (Params.world_height-(distance+1))) {													//Down
+							y_coord += distance;
+						}break;
+						
+				case 7: if(x_coord < (Params.world_width-(distance+1)) && y_coord < (Params.world_height-(distance+1))) {	//Right, Down
+							x_coord += distance;
+							y_coord += distance;
+						}break;
+								
+				default: break;																								//If invalid, do nothing
+			}
+					
+			if(tempx != x_coord || tempy != y_coord) {
+				energy -= cost;
+			}
+		}		
+	}
 	protected final void walk(int direction) {
+		movement(direction,1,Params.walk_energy_cost);
 	}
 	
 	protected final void run(int direction) {
-		
+		movement(direction,1,Params.run_energy_cost);
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
