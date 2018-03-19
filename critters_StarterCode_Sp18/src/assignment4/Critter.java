@@ -132,17 +132,14 @@ public abstract class Critter {
 			Class c = Class.forName(critter_class_name);
 			
 			Critter crit = (Critter) c.newInstance();
-<<<<<<< HEAD
 			// for testing
 			System.out.println("Width: "+Params.world_width+" Height: "+Params.world_height);
 			if(crit.y_coord>Params.world_height-1||crit.x_coord>Params.world_width-1||crit.x_coord<0||crit.y_coord<0) {
 				System.out.println("oops at: " +crit.x_coord +","+crit.y_coord);
 			} // end of code for testing
-=======
 			crit.energy = Params.start_energy;
 			crit.x_coord = rand.nextInt(Params.world_width);
 			crit.y_coord = rand.nextInt(Params.world_height);
->>>>>>> 79aa49477a120e091a63ca647d4fc0e4af574aae
 			
 			population.add(crit);
 		}
