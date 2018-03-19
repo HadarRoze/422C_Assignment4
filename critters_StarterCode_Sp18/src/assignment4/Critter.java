@@ -45,11 +45,13 @@ public abstract class Critter {
 	public String toString() { return ""; }
 	
 	//private int energy = 0;
+	//Step 6 has us set energy to Params.start_energy
 	private int energy = Params.start_energy;
 	protected int getEnergy() { return energy; }
 	
 	//private int x_coord;
 	//private int y_coord;
+	//Step 6 has us randomly set the location
 	private int x_coord = rand.nextInt(Params.world_height);
 	private int y_coord = rand.nextInt(Params.world_width);
 	
