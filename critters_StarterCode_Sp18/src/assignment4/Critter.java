@@ -44,16 +44,11 @@ public abstract class Critter {
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() { return ""; }
 	
-	//private int energy = 0;
-	//Step 6 has us set energy to Params.start_energy
-	private int energy = Params.start_energy;
+	private int energy = 0;
 	protected int getEnergy() { return energy; }
 	
-	//private int x_coord;
-	//private int y_coord;
-	//Step 6 has us randomly set the location
-	private int x_coord = rand.nextInt(Params.world_width);
-	private int y_coord = rand.nextInt(Params.world_height);
+	private int x_coord;
+	private int y_coord;
 	
 	//Step 8
 	private final void movement(int direction, int distance, int cost) {
@@ -137,6 +132,9 @@ public abstract class Critter {
 			Class c = Class.forName(critter_class_name);
 			
 			Critter crit = (Critter) c.newInstance();
+			crit.energy = Params.start_energy;
+			crit.x_coord = rand.nextInt(Params.world_width);
+			crit.y_coord = rand.nextInt(Params.world_height);
 			
 			population.add(crit);
 		}
