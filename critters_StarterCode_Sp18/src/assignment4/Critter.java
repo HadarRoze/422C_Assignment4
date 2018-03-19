@@ -44,11 +44,16 @@ public abstract class Critter {
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() { return ""; }
 	
-	private int energy = 0;
+	//private int energy = 0;
+	//Step 6 has us set energy to Params.start_energy
+	private int energy = Params.start_energy;
 	protected int getEnergy() { return energy; }
 	
-	private int x_coord;
-	private int y_coord;
+	//private int x_coord;
+	//private int y_coord;
+	//Step 6 has us randomly set the location
+	private int x_coord = rand.nextInt(Params.world_height);
+	private int y_coord = rand.nextInt(Params.world_width);
 	
 	protected final void walk(int direction) {
 	}
@@ -74,6 +79,16 @@ public abstract class Critter {
 	 * @throws InvalidCritterException
 	 */
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
+		try {
+			Class c = Class.forName(critter_class_name);
+			
+			Critter crit = (Critter) c.newInstance();
+			
+			population.add(crit);
+		}
+		catch (Exception e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
 	}
 	
 	/**
