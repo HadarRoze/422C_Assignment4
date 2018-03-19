@@ -173,6 +173,27 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		// Complete this method.
+		// add babies to population
+		for(Critter babe: babies) { // might result with an over bounds error
+			population.add(babe);
+		}
+		babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
+		// Invoke doTimeStep for each living Critter
+		for(Critter crit: population) { 
+			// add something to not execute the step of a dead critter? might want to do this in the doTimeStep itself
+			crit.doTimeStep();
+		}
+		// remove dead critters
+		List<Critter> deads = new java.util.ArrayList<Critter>(); // might go out of bounds idk yet
+		for(Critter crit: population) {
+			if(crit.getEnergy()<=0) {
+				deads.add(crit);
+			}
+		}
+		for(Critter dead: deads) { // could maybe do the thing where it erases it from dead as well because it came from pop but honestly i don't think java does that
+			population.remove(dead);
+		}
+		// [Something for stage 2]
 	}
 	
 	public static void displayWorld() {
