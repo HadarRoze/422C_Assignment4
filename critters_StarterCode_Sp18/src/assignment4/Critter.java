@@ -240,9 +240,59 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		// Complete this method.
+		// add babies to population
+		for(Critter babe: babies) { // might result with an over bounds error
+			population.add(babe);
+		}
+		babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
+		// Invoke doTimeStep for each living Critter
+		for(Critter crit: population) { 
+			// add something to not execute the step of a dead critter? might want to do this in the doTimeStep itself
+			crit.doTimeStep();
+		}
+		// remove dead critters
+		List<Critter> deads = new java.util.ArrayList<Critter>(); // might go out of bounds idk yet
+		for(Critter crit: population) {
+			if(crit.getEnergy()<=0) {
+				deads.add(crit);
+			}
+		}
+		for(Critter dead: deads) { // could maybe do the thing where it erases it from dead as well because it came from pop but honestly i don't think java does that
+			population.remove(dead);
+		}
+		// [Something for stage 2]
 	}
 	
 	public static void displayWorld() {
-		// Complete this method.
+		// Complete this method
+		// create parameters for the grid
+		int height = Params.world_height + 2;
+		int width = Params.world_width + 2;
+		boolean colEnd;
+		boolean rowEnd; // these will hold values of whether the current point is at the end of the world or not
+		String[][] viewedWorld = new String[height][width];
+		// go thru population and mark them on the map
+		for(Critter crit: population) {
+			viewedWorld[crit.y_coord+1][crit.x_coord+1] = crit.toString();
+		}
+		// go thru entire world, replace content if needed, and print
+		for(int y = 0; y < height; y++) {
+			for(int x = 0; x < width; x++) {
+				colEnd = ((x == 0)||(x == width-1));
+				rowEnd = ((y == 0)||(y == height-1)); // determine whether the point is on the borders of the world
+				
+				if(colEnd&&rowEnd) {
+					viewedWorld[y][x] = "+";
+				} else if(colEnd) {
+					viewedWorld[y][x] = "|";
+				} else if(rowEnd) {
+					viewedWorld[y][x] = "-";
+				} else if(viewedWorld[y][x] == null) { // i think this is the default but it might not be
+					viewedWorld[y][x] = " ";
+				}
+				System.out.print(viewedWorld[y][x]);
+			}
+			System.out.print("\n"); // did they mean print or just out? need to check this
+		}
 	}
 }
