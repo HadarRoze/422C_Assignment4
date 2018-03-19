@@ -235,11 +235,12 @@ public abstract class Critter {
 					viewedWorld[y][x] = "|";
 				} else if(rowEnd) {
 					viewedWorld[y][x] = "-";
-				} else if(viewedWorld[y][x] == "") { // i think this is the default but it might not be
+				} else if(viewedWorld[y][x] == null) { // i think this is the default but it might not be
 					viewedWorld[y][x] = " ";
 				}
+				System.out.print(viewedWorld[y][x]);
 			}
-			System.out.println(viewedWorld[y]); // did they mean print or just out? need to check this
+			System.out.print("\n"); // did they mean print or just out? need to check this
 		}
 	}
 }

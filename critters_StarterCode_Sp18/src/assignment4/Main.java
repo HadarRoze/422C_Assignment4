@@ -70,7 +70,29 @@ public class Main {
         /* Do not alter the code above for your submission. */
         /* Write your code below. */
         
-        // System.out.println("GLHF");
+        //System.out.println("GLHF");
+        while(true) {
+        	System.out.print("critters> ");
+        	String command = kb.next();
+        	if(command.equals("quit")) { // do we need to account for writing stuff after quit?
+        		break;
+        	} else if(command.equals("show")) {
+        		Critter.displayWorld();
+        	} else if(command.equals("step")) { // need to account for additional things from stage 2
+        		Critter.worldTimeStep();
+        	} else if(command.equals("make")) { // this is only for stages 1 and 2 
+        		try{
+        			for(int x = 0; x<100; x++) {	
+        				Critter.makeCritter(myPackage+".Craig");
+        			}
+        			for(int x = 0; x<25; x++) {
+        				Critter.makeCritter(myPackage+".Algae");
+        			}
+        		} 
+        		catch (InvalidCritterException e) {System.out.print("oops");}
+        	}
+        }
+        
         
         /* Write your code above */
         System.out.flush();
