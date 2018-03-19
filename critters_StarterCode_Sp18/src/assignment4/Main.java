@@ -5,9 +5,9 @@ package assignment4;
  * Hadar Rozenberg
  * hr7358
  * 15466
- * <Student2 Name>
- * <Student2 EID>
- * <Student2 5-digit Unique No.>
+ * Brandon Pham
+ * bp23792
+ * 15460
  * Slip days used: <0>
  * Fall 2016
  */
