@@ -74,6 +74,16 @@ public abstract class Critter {
 	 * @throws InvalidCritterException
 	 */
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
+		try {
+			Class c = Class.forName(critter_class_name);
+			
+			Critter crit = (Critter) c.newInstance();
+			
+			population.add(crit);
+		}
+		catch (Exception e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
 	}
 	
 	/**
