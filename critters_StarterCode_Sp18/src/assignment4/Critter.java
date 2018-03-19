@@ -113,7 +113,7 @@ public abstract class Critter {
 	}
 	
 	protected final void run(int direction) {
-		movement(direction,1,Params.run_energy_cost);
+		movement(direction,2,Params.run_energy_cost);
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
