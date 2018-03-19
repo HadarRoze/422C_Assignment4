@@ -83,6 +83,11 @@ public abstract class Critter {
 			Class c = Class.forName(critter_class_name);
 			
 			Critter crit = (Critter) c.newInstance();
+			// for testing
+			System.out.println("Width: "+Params.world_width+" Height: "+Params.world_height);
+			if(crit.y_coord>Params.world_height-1||crit.x_coord>Params.world_width-1||crit.x_coord<0||crit.y_coord<0) {
+				System.out.println("oops at: " +crit.x_coord +","+crit.y_coord);
+			} // end of code for testing
 			
 			population.add(crit);
 		}
