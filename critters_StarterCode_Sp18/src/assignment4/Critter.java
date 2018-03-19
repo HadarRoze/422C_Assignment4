@@ -44,22 +44,71 @@ public abstract class Critter {
 	/* a one-character long string that visually depicts your critter in the ASCII interface */
 	public String toString() { return ""; }
 	
-	//private int energy = 0;
-	//Step 6 has us set energy to Params.start_energy
-	private int energy = Params.start_energy;
+	private int energy = 0;
 	protected int getEnergy() { return energy; }
 	
-	//private int x_coord;
-	//private int y_coord;
-	//Step 6 has us randomly set the location
-	private int x_coord = rand.nextInt(Params.world_height);
-	private int y_coord = rand.nextInt(Params.world_width);
+	private int x_coord;
+	private int y_coord;
 	
+	//Step 8
+	private final void movement(int direction, int distance, int cost) {
+		// Assumption: If you do not have the energy to walk or you try to walk into a wall, you do not walk
+		// Assumption: If you cannot complete the move, you do not move
+		if(energy >= cost) {
+			int tempx = x_coord;
+			int tempy = y_coord; 
+			switch(direction) {
+					
+				case 0: if(x_coord < (Params.world_width-(distance+1))) {													//Right
+							x_coord += distance;
+						}break;
+								
+				case 1: if(x_coord < (Params.world_width-(distance+1)) && y_coord >= distance) {							//Right, Up
+							x_coord += distance;
+							y_coord -= distance;
+						}break;
+								
+				case 2: if(y_coord >= distance) {																			//Up
+							y_coord -= distance;
+						}break;
+								
+				case 3: if(x_coord >= distance && y_coord >= distance) {													//Left, Up
+							x_coord -= distance;
+							y_coord -= distance;
+						}break;
+								
+				case 4: if(x_coord >= distance) {																			//Left
+							x_coord -= distance;
+						}break;
+								
+				case 5: if(x_coord >= distance && y_coord < (Params.world_height-(distance+1))) {							//Left, Down
+							x_coord -= distance;
+							y_coord += distance;
+						}break;
+						
+				case 6: if(y_coord < (Params.world_height-(distance+1))) {													//Down
+							y_coord += distance;
+						}break;
+						
+				case 7: if(x_coord < (Params.world_width-(distance+1)) && y_coord < (Params.world_height-(distance+1))) {	//Right, Down
+							x_coord += distance;
+							y_coord += distance;
+						}break;
+								
+				default: break;																								//If invalid, do nothing
+			}
+					
+			if(tempx != x_coord || tempy != y_coord) {
+				energy -= cost;
+			}
+		}		
+	}
 	protected final void walk(int direction) {
+		movement(direction,1,Params.walk_energy_cost);
 	}
 	
 	protected final void run(int direction) {
-		
+		movement(direction,2,Params.run_energy_cost);
 	}
 	
 	protected final void reproduce(Critter offspring, int direction) {
@@ -83,11 +132,17 @@ public abstract class Critter {
 			Class c = Class.forName(critter_class_name);
 			
 			Critter crit = (Critter) c.newInstance();
+<<<<<<< HEAD
 			// for testing
 			System.out.println("Width: "+Params.world_width+" Height: "+Params.world_height);
 			if(crit.y_coord>Params.world_height-1||crit.x_coord>Params.world_width-1||crit.x_coord<0||crit.y_coord<0) {
 				System.out.println("oops at: " +crit.x_coord +","+crit.y_coord);
 			} // end of code for testing
+=======
+			crit.energy = Params.start_energy;
+			crit.x_coord = rand.nextInt(Params.world_width);
+			crit.y_coord = rand.nextInt(Params.world_height);
+>>>>>>> 79aa49477a120e091a63ca647d4fc0e4af574aae
 			
 			population.add(crit);
 		}
