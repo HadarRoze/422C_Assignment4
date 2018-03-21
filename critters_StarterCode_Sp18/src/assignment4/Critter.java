@@ -245,11 +245,6 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		// Complete this method.
-		// add babies to population
-		for(Critter babe: babies) { // might result with an over bounds error
-			population.add(babe);
-		}
-		babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
 		// Invoke doTimeStep for each living Critter
 		for(Critter crit: population) { 
 			// add something to not execute the step of a dead critter? might want to do this in the doTimeStep itself
@@ -265,7 +260,11 @@ public abstract class Critter {
 		for(Critter dead: deads) { // could maybe do the thing where it erases it from dead as well because it came from pop but honestly i don't think java does that
 			population.remove(dead);
 		}
-		// [Something for stage 2]
+		// add babies to population
+				for(Critter babe: babies) { // might result with an over bounds error
+					population.add(babe);
+				}
+				babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
 	}
 	
 	public static void displayWorld() {
