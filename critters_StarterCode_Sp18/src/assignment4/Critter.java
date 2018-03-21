@@ -245,11 +245,12 @@ public abstract class Critter {
 	
 	public static void worldTimeStep() {
 		// Complete this method.
-		// Invoke doTimeStep for each living Critter
+		// need to add encounters? 
 		for(Critter crit: population) { 
 			// add something to not execute the step of a dead critter? might want to do this in the doTimeStep itself
 			crit.doTimeStep();
 		}
+		processEncounters(); // process all of the encounters
 		// remove dead critters
 		List<Critter> deads = new java.util.ArrayList<Critter>(); // might go out of bounds idk yet
 		for(Critter crit: population) {
@@ -298,5 +299,50 @@ public abstract class Critter {
 			}
 			System.out.print("\n"); // did they mean print or just out? need to check this
 		}
+	}
+	
+	// method to process encounters
+	private static void processEncounters() {
+		int length = population.size();
+		if(length == 0) {
+			return;
+		}
+		for(int first = 0; first < length; first++) { // loop thru population
+			for(int second = first+1; second < length; second++) {
+				if(population.get(first).getEnergy()<=0) { // if this critter is dead, there's no use comparing him to the others
+					break;
+				}
+				if(shouldEncounter(population.get(first), population.get(second))) { // the 2 critters encountered one another
+					boolean firstFight = population.get(first).fight(population.get(second).toString());
+					boolean secondFight = population.get(second).fight(population.get(first).toString());
+					if((population.get(first).getEnergy()<=0)&&(shouldEncounter(population.get(first), population.get(second)))) { // if both are alive and in the same spot
+						int first_roll = 0;
+						int second_roll = 0;
+						if(firstFight) {
+							first_roll = population.get(first).getRandomInt(population.get(first).getEnergy());
+						}
+						if(secondFight) {
+							second_roll = population.get(second).getRandomInt(population.get(second).getEnergy());
+						}
+						if(first_roll>=second_roll) { // first critter wins
+							population.get(first).energy += (population.get(second).energy/2);
+							population.get(second).energy = 0;
+						} else {
+							population.get(second).energy += (population.get(first).energy/2);
+							population.get(first).energy = 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	// method to determine if an encounter should happen or not
+	// mostly needed to reduce "wordiness" in processEncounters 
+	private static boolean shouldEncounter(Critter c1, Critter c2) {
+		if((c1.x_coord==c2.x_coord)&&(c1.y_coord==c2.y_coord)&&(c2.getEnergy()<=0)) { // same location and second critter isn't dead (expected that critter 1 is alive)
+			return true;
+		}
+		return false;
 	}
 }
