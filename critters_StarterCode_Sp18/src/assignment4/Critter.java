@@ -319,10 +319,10 @@ public abstract class Critter {
 						int first_roll = 0;
 						int second_roll = 0;
 						if(firstFight) {
-							first_roll = population.get(first).getRandomInt(population.get(first).getEnergy());
+							first_roll = Critter.getRandomInt(population.get(first).getEnergy());
 						}
 						if(secondFight) {
-							second_roll = population.get(second).getRandomInt(population.get(second).getEnergy());
+							second_roll = Critter.getRandomInt(population.get(second).getEnergy());
 						}
 						if(first_roll>=second_roll) { // first critter wins
 							population.get(first).energy += (population.get(second).energy/2);
