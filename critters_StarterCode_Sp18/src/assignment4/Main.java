@@ -70,7 +70,7 @@ public class Main {
         /* Do not alter the code above for your submission. */
         /* Write your code below. */
         
-        //System.out.println("GLHF");
+        // System.out.println(3/2);
         while(true) {
         	System.out.print("critters> ");
         	String command = kb.next();
