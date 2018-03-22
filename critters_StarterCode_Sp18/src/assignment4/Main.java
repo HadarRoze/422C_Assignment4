@@ -99,7 +99,7 @@ public class Main {
         // System.out.println(3/2);
         while(true) {
         	
-        	System.out.print("critters> ");
+        	System.out.print("critters>");
         	String command = kb.nextLine();
         	String cArray[] = command.split(" ");	// Take entire line and split into sting arrays
         	
@@ -172,7 +172,7 @@ public class Main {
         		if(cArray.length == 2) {
         			try {
         				String className = cArray[1];
-        				Craig.runStats(Critter.getInstances(className));
+        				Critter.runStats(Critter.getInstances(className));
         			}
         			catch (InvalidCritterException e) {
         				System.out.println("error processing: " + command);
