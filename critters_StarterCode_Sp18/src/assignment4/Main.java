@@ -87,14 +87,30 @@ public class Main {
         		} else {
         			Critter.worldTimeStep();
         		}
-        	} else if(command.equals("make")) { // this is only for stages 1 and 2 
+        	} else if(command.equals("make")) { 
         		try{
-        			for(int x = 0; x<100; x++) {	
+        			/*for(int x = 0; x<100; x++) {					// this is only for stages 1 and 2 
         				Critter.makeCritter(myPackage+".Craig");
         			}
         			for(int x = 0; x<25; x++) {
         				Critter.makeCritter(myPackage+".Algae");
-        			}
+        			}*/
+        			if(kb.hasNext()) {
+            			try {
+            				String className = kb.next();
+            				if(kb.hasNextInt()) {
+            					int amount = kb.nextInt();
+            					for(int i = 0; i < amount; i++) {
+            						Critter.makeCritter(myPackage + "." + className);
+            					}
+            				} else {
+            					Critter.makeCritter(myPackage + "." + className);
+            				}
+            			}
+            			catch (InvalidCritterException e) {System.out.println("oops2");}
+            		} else {
+            			System.out.println("Please specify critter name");
+            		}
         		} 
         		catch (InvalidCritterException e) {System.out.print("oops");}
         	} else if(command.equals("seed")) {
@@ -103,6 +119,16 @@ public class Main {
         			Critter.setSeed(seed);
         		} else {
         			System.out.println("Please specify a number when invoking seed.");
+        		}
+        	} else if(command.equals("stats")) {
+        		if(kb.hasNext()) {
+        			try {
+        				String className = kb.next();
+        				Craig.runStats(Critter.getInstances(className));
+        			}
+        			catch (InvalidCritterException e) {System.out.println("oops2");}
+        		} else {
+        			System.out.println("Please specify critter name");
         		}
         	}
         }
