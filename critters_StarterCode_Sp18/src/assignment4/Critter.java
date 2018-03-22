@@ -144,11 +144,6 @@ public abstract class Critter {
 			Class c = Class.forName(critter_class_name);
 			
 			Critter crit = (Critter) c.newInstance();
-			// for testing
-			System.out.println("Width: "+Params.world_width+" Height: "+Params.world_height);
-			if(crit.y_coord>Params.world_height-1||crit.x_coord>Params.world_width-1||crit.x_coord<0||crit.y_coord<0) {
-				System.out.println("oops at: " +crit.x_coord +","+crit.y_coord);
-			} // end of code for testing
 			crit.energy = Params.start_energy;
 			crit.x_coord = rand.nextInt(Params.world_width);
 			crit.y_coord = rand.nextInt(Params.world_height);
@@ -256,10 +251,8 @@ public abstract class Critter {
 	}
 	
 	public static void worldTimeStep() {
-		// Complete this method.
-		// need to add encounters? 
+		// execute timeStep for all living critters
 		for(Critter crit: population) { 
-			// add something to not execute the step of a dead critter? might want to do this in the doTimeStep itself
 			crit.doTimeStep();
 		}
 		processEncounters(); // process all of the encounters
@@ -274,10 +267,18 @@ public abstract class Critter {
 			population.remove(dead);
 		}
 		// add babies to population
-				for(Critter babe: babies) { // might result with an over bounds error
-					population.add(babe);
-				}
-				babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
+		for(Critter babe: babies) { // might result with an over bounds error
+			population.add(babe);
+		}
+		babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
+		// refresh algae count
+		int init_size = population.size();
+		for(int count = 0; count < Params.refresh_algae_count; count++) {
+			population.add(new Algae());
+			population.get(init_size+count).energy = Params.start_energy;
+			population.get(init_size+count).x_coord = rand.nextInt(Params.world_width);
+			population.get(init_size+count).y_coord = rand.nextInt(Params.world_height);
+		}
 	}
 	
 	public static void displayWorld() {
