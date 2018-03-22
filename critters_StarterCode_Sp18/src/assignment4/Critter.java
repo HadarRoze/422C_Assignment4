@@ -295,6 +295,10 @@ public abstract class Critter {
 			population.add(babe);
 		}
 		babies.clear(); // not sure about the ins and outs of this method, it could result with an issue in the end
+		// reset movedThisTurn
+		for(Critter crit: population) {
+			crit.movedThisTurn = false;
+		}
 		// refresh algae count
 		int init_size = population.size();
 		for(int count = 0; count < Params.refresh_algae_count; count++) {
