@@ -25,7 +25,11 @@ public abstract class Critter {
 	private static String myPackage;
 	private	static List<Critter> population = new java.util.ArrayList<Critter>();
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
-
+	
+	// additional fields (Hadar)
+	private int prev_x;
+	private int prev_y;
+	private boolean movedThisTurn;
 	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
@@ -253,7 +257,13 @@ public abstract class Critter {
 	public static void worldTimeStep() {
 		// execute timeStep for all living critters
 		for(Critter crit: population) { 
+			crit.recordPrevious();
 			crit.doTimeStep();
+			if((crit.prev_x==crit.x_coord)&&(crit.prev_y==crit.y_coord)) { // check for movement
+				crit.movedThisTurn = false;
+			} else {
+				crit.movedThisTurn = true;
+			}
 		}
 		processEncounters(); // process all of the encounters
 		// remove dead critters
@@ -326,8 +336,15 @@ public abstract class Critter {
 					break;
 				}
 				if(shouldEncounter(population.get(first), population.get(second))) { // the 2 critters encountered one another
+					// records previous locations to prevent more movement than is allowed
+					population.get(first).recordPrevious();
+					population.get(second).recordPrevious();
+					// invoke fight function
 					boolean firstFight = population.get(first).fight(population.get(second).toString());
 					boolean secondFight = population.get(second).fight(population.get(first).toString());
+					// fix location if needed
+					population.get(first).validateMovement();
+					population.get(second).validateMovement();
 					if((population.get(first).getEnergy()<=0)&&(shouldEncounter(population.get(first), population.get(second)))) { // if both are alive and in the same spot
 						int first_roll = 0;
 						int second_roll = 0;
@@ -357,5 +374,21 @@ public abstract class Critter {
 			return true;
 		}
 		return false;
+	}
+	
+	// records current location to previous location. This is mostly to reduce wordiness.
+	private void recordPrevious() {
+		prev_x = x_coord;
+		prev_y = y_coord;
+	}
+	
+	// checks if a movement is the first for the turn and reverts it if it isn't. If there is a movement and it's the first one, indicate that critter moved in this step
+	private void validateMovement() {
+		if(movedThisTurn && ((prev_x!=x_coord) || (prev_y!=y_coord))) { // return position to previous position
+			x_coord = prev_x;
+			y_coord = prev_y;
+		} else if((prev_x!=x_coord) || (prev_y!=y_coord)) {
+			movedThisTurn = true;
+		}
 	}
 }
