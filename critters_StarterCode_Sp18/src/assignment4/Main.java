@@ -172,7 +172,7 @@ public class Main {
         		if(cArray.length == 2) {
         			try {
         				String className = cArray[1];
-        				Craig.runStats(Critter.getInstances(className));
+        				Critter.runStats(Critter.getInstances(className));
         			}
         			catch (InvalidCritterException e) {
         				System.out.println("error processing: " + command);
