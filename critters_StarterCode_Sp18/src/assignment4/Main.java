@@ -35,6 +35,32 @@ public class Main {
     static {
         myPackage = Critter.class.getPackage().toString().split(" ")[1];
     }
+    
+    private static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		}
+		catch (NumberFormatException e) {
+			return false;
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
+    	return true;
+    }
+    
+    private static boolean isLong(String s) {
+    	try {
+			Long.parseLong(s);
+		}
+		catch (NumberFormatException e) {
+			return false;
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
+    	return true;
+    }
 
     /**
      * Main method.
@@ -72,64 +98,90 @@ public class Main {
         
         // System.out.println(3/2);
         while(true) {
+        	
         	System.out.print("critters> ");
-        	String command = kb.next();
-        	if(command.equals("quit")) { // do we need to account for writing stuff after quit?
-        		break;
-        	} else if(command.equals("show")) {
-        		Critter.displayWorld();
-        	} else if(command.equals("step")) { // need to account for additional things from stage 2
-        		if(kb.hasNextInt()) {
-        			int count = kb.nextInt();
+        	String command = kb.nextLine();
+        	String cArray[] = command.split(" ");	// Take entire line and split into sting arrays
+        	
+        	if(cArray[0].equals("quit")) { 			// do we need to account for writing stuff after quit?
+        		if(cArray.length == 1) {
+        			break;
+        		} else {
+        			System.out.println("error processing: " + command);
+        		}
+        	} 
+        	
+        	else if(cArray[0].equals("show")) {
+        		if(cArray.length == 1) {
+        			Critter.displayWorld();
+        		} else {
+        			System.out.println("error processing: " + command);
+        		}
+        	} 
+        	
+        	else if(cArray[0].equals("step")) { 	// need to account for additional things from stage 2
+        		if(cArray.length == 2 && isInteger(cArray[1])) {
+        			int count = Integer.parseInt(cArray[1]);
         			for(int x = 0; x < count; x++) {
         				Critter.worldTimeStep();
         			}
-        		} else {
+        		} else if(cArray.length == 1) {
         			Critter.worldTimeStep();
+        		} else {
+        			System.out.println("error processing: " + command);
         		}
-        	} else if(command.equals("make")) { 
-        		try{
-        			/*for(int x = 0; x<100; x++) {					// this is only for stages 1 and 2 
-        				Critter.makeCritter(myPackage+".Craig");
+        	} 
+        	
+        	else if(cArray[0].equals("make")) { 
+    			/*for(int x = 0; x<100; x++) {					// this is only for stages 1 and 2 
+    				Critter.makeCritter(myPackage+".Craig");
+    			}
+    			for(int x = 0; x<25; x++) {
+    				Critter.makeCritter(myPackage+".Algae");
+    			}*/
+    			if(cArray.length > 1 && cArray.length <= 3) {	// make <class_name> [<count>]
+        			try {
+        				String className = cArray[1];
+        				if(cArray.length == 3 && isInteger(cArray[2])) { 	// make <class_name> [<count>]
+        					int amount = Integer.parseInt(cArray[2]);
+        					for(int i = 0; i < amount; i++) {
+        						Critter.makeCritter(myPackage + "." + className);
+        					}
+        				} else if(cArray.length == 2){						// make <class_name>
+        					Critter.makeCritter(myPackage + "." + className);
+        				} else {
+        					System.out.println("error processing: " + command);
+        				}
         			}
-        			for(int x = 0; x<25; x++) {
-        				Critter.makeCritter(myPackage+".Algae");
-        			}*/
-        			if(kb.hasNext()) {
-            			try {
-            				String className = kb.next();
-            				if(kb.hasNextInt()) {
-            					int amount = kb.nextInt();
-            					for(int i = 0; i < amount; i++) {
-            						Critter.makeCritter(myPackage + "." + className);
-            					}
-            				} else {
-            					Critter.makeCritter(myPackage + "." + className);
-            				}
-            			}
-            			catch (InvalidCritterException e) {System.out.println("oops2");}
-            		} else {
-            			System.out.println("Please specify critter name");
-            		}
-        		} 
-        		catch (InvalidCritterException e) {System.out.print("oops");}
-        	} else if(command.equals("seed")) {
-        		if(kb.hasNextLong()) {
-        			Long seed = kb.nextLong();
+        			catch (InvalidCritterException e) {System.out.println("error processing: " + command);}
+    			}
+    			System.out.println("error processing: " + command);
+        	} 
+        	
+        	else if(cArray[0].equals("seed")) {
+        		if(cArray.length == 2 && isLong(cArray[1])) {
+        			Long seed = Long.parseLong(cArray[1]);
         			Critter.setSeed(seed);
         		} else {
-        			System.out.println("Please specify a number when invoking seed.");
+        			System.out.println("error processing: " + command);
         		}
-        	} else if(command.equals("stats")) {
-        		if(kb.hasNext()) {
+        	} 
+        	
+        	else if(cArray[0].equals("stats")) {
+        		if(cArray.length == 2) {
         			try {
-        				String className = kb.next();
+        				String className = cArray[1];
         				Craig.runStats(Critter.getInstances(className));
         			}
-        			catch (InvalidCritterException e) {System.out.println("oops2");}
-        		} else {
-        			System.out.println("Please specify critter name");
+        			catch (InvalidCritterException e) {
+        				System.out.println("error processing: " + command);
+        			}
         		}
+        		System.out.println("error processing: " + command);
+        	}
+        	
+        	else if(cArray.length == 1){
+        		System.out.println("invalid command: " + command);
         	}
         }
         
