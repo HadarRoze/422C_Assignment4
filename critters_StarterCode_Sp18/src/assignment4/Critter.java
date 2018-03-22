@@ -264,7 +264,8 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		// Complete this method.
+		population.clear();
+		babies.clear();
 	}
 	
 	public static void worldTimeStep() {
@@ -401,6 +402,15 @@ public abstract class Critter {
 			x_coord = prev_x;
 			y_coord = prev_y;
 		} else if((prev_x!=x_coord) || (prev_y!=y_coord)) {
+			for(Critter other: population) {
+				if(this == other) {
+					continue;
+				} else if((x_coord==other.x_coord)&&(y_coord==other.y_coord)) {
+					x_coord = prev_x;
+					y_coord = prev_y;
+					return;
+				}
+			}
 			movedThisTurn = true;
 		}
 	}
