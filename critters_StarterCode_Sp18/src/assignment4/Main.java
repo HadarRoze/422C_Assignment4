@@ -99,7 +99,7 @@ public class Main {
         // System.out.println(3/2);
         while(true) {
         	
-        	System.out.print("critters> ");
+        	System.out.print("critters>");
         	String command = kb.nextLine();
         	String cArray[] = command.split(" ");	// Take entire line and split into sting arrays
         	
