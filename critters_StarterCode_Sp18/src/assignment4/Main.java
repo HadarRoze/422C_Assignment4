@@ -154,8 +154,9 @@ public class Main {
         				}
         			}
         			catch (InvalidCritterException e) {System.out.println("error processing: " + command);}
+    			} else {
+    				System.out.println("error processing: " + command);
     			}
-    			System.out.println("error processing: " + command);
         	} 
         	
         	else if(cArray[0].equals("seed")) {
@@ -176,11 +177,12 @@ public class Main {
         			catch (InvalidCritterException e) {
         				System.out.println("error processing: " + command);
         			}
+        		} else {
+        			System.out.println("error processing: " + command);
         		}
-        		System.out.println("error processing: " + command);
         	}
         	
-        	else if(cArray.length == 1){
+        	else {
         		System.out.println("invalid command: " + command);
         	}
         }
