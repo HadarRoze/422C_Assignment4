@@ -149,8 +149,8 @@ public abstract class Critter {
 			
 			Critter crit = (Critter) c.newInstance();
 			crit.energy = Params.start_energy;
-			crit.x_coord = getRandomInt(Params.world_width);
-			crit.y_coord = getRandomInt(Params.world_height);
+			crit.x_coord = rand.nextInt(Params.world_width);
+			crit.y_coord = rand.nextInt(Params.world_height);
 			
 			population.add(crit);
 		}
