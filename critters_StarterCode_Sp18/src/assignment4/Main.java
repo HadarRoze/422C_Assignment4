@@ -79,7 +79,14 @@ public class Main {
         	} else if(command.equals("show")) {
         		Critter.displayWorld();
         	} else if(command.equals("step")) { // need to account for additional things from stage 2
-        		Critter.worldTimeStep();
+        		if(kb.hasNextInt()) {
+        			int count = kb.nextInt();
+        			for(int x = 0; x < count; x++) {
+        				Critter.worldTimeStep();
+        			}
+        		} else {
+        			Critter.worldTimeStep();
+        		}
         	} else if(command.equals("make")) { // this is only for stages 1 and 2 
         		try{
         			for(int x = 0; x<100; x++) {	
@@ -90,6 +97,13 @@ public class Main {
         			}
         		} 
         		catch (InvalidCritterException e) {System.out.print("oops");}
+        	} else if(command.equals("seed")) {
+        		if(kb.hasNextLong()) {
+        			Long seed = kb.nextLong();
+        			Critter.setSeed(seed);
+        		} else {
+        			System.out.println("Please specify a number when invoking seed.");
+        		}
         	}
         }
         
