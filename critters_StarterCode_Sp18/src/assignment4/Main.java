@@ -13,7 +13,9 @@ package assignment4;
  */
 
 import java.util.Scanner;
+import java.awt.List;
 import java.io.*;
+import java.lang.reflect.Method;
 
 
 /*
@@ -60,6 +62,18 @@ public class Main {
 			return false;
 		}
     	return true;
+    }
+    
+    private static void StatRunner(String s) throws InvalidCritterException{
+    	try {
+    		Class<?> c = Class.forName(myPackage + "." + s);
+    		Method m = c.getMethod("runStats",java.util.List.class);
+    		java.util.List list = (java.util.List) Critter.getInstances(s);
+    		 m.invoke(c.newInstance(), list);
+    	}
+    	catch(Exception e) {
+    		throw new InvalidCritterException(myPackage + "." + s);
+    	}
     }
 
     /**
@@ -172,7 +186,7 @@ public class Main {
         		if(cArray.length == 2) {
         			try {
         				String className = cArray[1];
-        				Critter.runStats(Critter.getInstances(className));
+        				StatRunner(className);
         			}
         			catch (InvalidCritterException e) {
         				System.out.println("error processing: " + command);
