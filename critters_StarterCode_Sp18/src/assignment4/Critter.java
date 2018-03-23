@@ -125,6 +125,8 @@ public abstract class Critter {
 		offspring.energy = this.energy/2;
 		this.energy = offspring.energy+energy_remainder;
 		// assign position
+		offspring.x_coord = this.x_coord;
+		offspring.y_coord = this.y_coord;
 		offspring.movement(direction, 1, 0);
 		// add baby to babies
 		babies.add(offspring);

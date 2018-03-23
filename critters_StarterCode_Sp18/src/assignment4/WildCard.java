@@ -17,14 +17,14 @@ public class WildCard extends Critter{
 	public void doTimeStep() { 
 		switch(getRandomInt(4)) {
 		case 0:
-			walk(getRandomInt(7));
+			walk(getRandomInt(8));
 			break;
 		case 1:
-			run(getRandomInt(7));
+			run(getRandomInt(8));
 			break;
 		case 2:
 			WildCard babe = new WildCard();
-			reproduce(babe, getRandomInt(7));
+			reproduce(babe, getRandomInt(8));
 			break;
 		case 3: 
 			break;

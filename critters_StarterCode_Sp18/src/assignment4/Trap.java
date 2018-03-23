@@ -19,7 +19,7 @@ public class Trap extends Critter{
 		int currentEnergy = getEnergy();
 		if(currentEnergy > 2) {
 			Trap babe = new Trap();
-			reproduce(babe, getRandomInt(7));
+			reproduce(babe, getRandomInt(8));
 		} 
 	}
 	public boolean fight(String oponent) {

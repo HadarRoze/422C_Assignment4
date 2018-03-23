@@ -24,9 +24,9 @@ public class Zombie extends Critter{
 	public void doTimeStep() { 
 		if(prev_energy < getEnergy()) {
 			Zombie babe = new Zombie();
-			reproduce(babe, getRandomInt(7));
+			reproduce(babe, getRandomInt(8));
 		} else {
-			walk(getRandomInt(7));
+			walk(getRandomInt(8));
 		}
 		prev_energy = getEnergy();
 	}

@@ -21,11 +21,11 @@ public class Spooked extends Critter{
 	public void doTimeStep() {
 		if(found_food) {
 			Spooked babe = new Spooked();
-			reproduce(babe, getRandomInt(7));
+			reproduce(babe, getRandomInt(8));
 			found_food = false;
 		}
 		if(eventless_turns > 4) {
-			walk(getRandomInt(7));
+			walk(getRandomInt(8));
 			eventless_turns = 0;
 		} else {
 			eventless_turns ++;
@@ -37,7 +37,7 @@ public class Spooked extends Critter{
 			return true;
 		}
 		eventless_turns = 0;
-		run(getRandomInt(7));
+		run(getRandomInt(8));
 		return false;
 	}
 	
