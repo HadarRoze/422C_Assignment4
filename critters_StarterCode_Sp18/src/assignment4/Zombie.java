@@ -17,10 +17,16 @@ package assignment4;
 public class Zombie extends Critter{
 	private int prev_energy;
 	
+	/**
+     * Zombie constructor
+     */
 	public Zombie() {
 		prev_energy = getEnergy();
 	}
 	
+	/**
+     * This method simulates what the critter does during a time step
+     */
 	public void doTimeStep() { 
 		if(prev_energy < getEnergy()) {
 			Zombie babe = new Zombie();
@@ -30,6 +36,12 @@ public class Zombie extends Critter{
 		}
 		prev_energy = getEnergy();
 	}
+	
+	/**
+     * This method determines whether the critter will fight or run
+     * @param String oponenet - the conflicting critter
+     * @return boolean - true if the critter will fight
+     */
 	public boolean fight(String oponent) {
 		if(oponent == "T") {
 			return false;
@@ -37,6 +49,10 @@ public class Zombie extends Critter{
 		return true;
 	}
 	
+	/**
+     * This method returns the string version of the critter
+     * @return String - the string version of the critter
+     */
 	public String toString() {
 		return "Z";
 	}

@@ -14,6 +14,10 @@ package assignment4;
  */
 
 public class WildCard extends Critter{
+	
+	/**
+     * This method simulates what the critter does during a time step
+     */
 	public void doTimeStep() { 
 		switch(getRandomInt(4)) {
 		case 0:
@@ -30,6 +34,12 @@ public class WildCard extends Critter{
 			break;
 		}
 	}
+	
+	/**
+     * This method determines whether the critter will fight or run
+     * @param String oponenet - the conflicting critter
+     * @return boolean - true if the critter will fight
+     */
 	public boolean fight(String oponent) {
 		if(getRandomInt(2)==0) {
 			return true;
@@ -38,6 +48,10 @@ public class WildCard extends Critter{
 		}
 	}
 	
+	/**
+     * This method returns the string version of the critter
+     * @return String - the string version of the critter
+     */
 	public String toString() {
 		return "W";
 	}

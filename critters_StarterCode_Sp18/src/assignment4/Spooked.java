@@ -18,6 +18,9 @@ public class Spooked extends Critter{
 	private boolean found_food = false;
 	private int eventless_turns = 0;
 	
+	/**
+     * This method simulates what the critter does during a time step
+     */
 	public void doTimeStep() {
 		if(found_food) {
 			Spooked babe = new Spooked();
@@ -31,6 +34,12 @@ public class Spooked extends Critter{
 			eventless_turns ++;
 		}
 	}
+	
+	/**
+     * This method determines whether the critter will fight or run
+     * @param String oponenet - the conflicting critter
+     * @return boolean - true if the critter will fight
+     */
 	public boolean fight(String oponent) {
 		if(oponent == "A") {
 			found_food = true;
@@ -41,6 +50,10 @@ public class Spooked extends Critter{
 		return false;
 	}
 	
+	/**
+     * This method returns the string version of the critter
+     * @return String - the string version of the critter
+     */
 	public String toString() {
 		return "S";
 	}

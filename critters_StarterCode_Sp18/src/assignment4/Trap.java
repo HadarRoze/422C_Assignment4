@@ -15,6 +15,10 @@ package assignment4;
  */
 
 public class Trap extends Critter{
+	
+	/**
+     * This method simulates what the critter does during a time step
+     */
 	public void doTimeStep() {
 		int currentEnergy = getEnergy();
 		if(currentEnergy > 2) {
@@ -22,12 +26,26 @@ public class Trap extends Critter{
 			reproduce(babe, getRandomInt(8));
 		} 
 	}
+	
+	/**
+     * This method determines whether the critter will fight or run
+     * @param String oponenet - the conflicting critter
+     * @return boolean - true if the critter will fight
+     */
 	public boolean fight(String oponent) {
 		return true;
 	}
 	
+	/**
+     * This method gets the energy of the critter
+     * @return int - the energy of the critter
+     */
 	protected int getEnergy() { return super.getEnergy()*20; }
 	
+	/**
+     * This method returns the string version of the critter
+     * @return String - the string version of the critter
+     */
 	public String toString() {
 		return "T";
 	}

@@ -54,7 +54,12 @@ public abstract class Critter {
 	private int x_coord;
 	private int y_coord;
 	
-	//Step 8
+	/**
+     * This method moves the critter
+     * @param int direction - the direction of movement (0-7 corresponds to radian circle)
+     * @param int distance - distance of movement
+     * @param int cost - amount of energy needed to move
+     */
 	private final void movement(int direction, int distance, int cost) {
 		// Assumption: If you do not have the energy to walk or you try to walk into a wall, you do not walk
 		// Assumption: If you cannot complete the move, you do not move
@@ -107,14 +112,26 @@ public abstract class Critter {
 			}
 		}		
 	}
+	/**
+     * This method allows critters to walk
+     * @param int direction - direction of movement
+     */
 	protected final void walk(int direction) {
 		movement(direction,1,Params.walk_energy_cost);
 	}
 	
+	/**
+     * This method allows critters to run
+     * @param int direction - direction of movement
+     */
 	protected final void run(int direction) {
 		movement(direction,2,Params.run_energy_cost);
 	}
 	
+	/**
+     * This method allows critters to reproduce
+     * @param Critter offspring - the offspring of a critter
+     */
 	protected final void reproduce(Critter offspring, int direction) {
 		// check parent energy
 		if(this.energy<Params.min_reproduce_energy) {
@@ -270,6 +287,9 @@ public abstract class Critter {
 		babies.clear();
 	}
 	
+	/**
+     * This method simulates a step in time for the critters
+     */
 	public static void worldTimeStep() {
 		// execute timeStep for all living critters
 		for(Critter crit: population) { 
@@ -311,6 +331,9 @@ public abstract class Critter {
 		}
 	}
 	
+	/**
+     * This method displays the critter's world
+     */
 	public static void displayWorld() {
 		// Complete this method
 		// create parameters for the grid
@@ -344,7 +367,9 @@ public abstract class Critter {
 		}
 	}
 	
-	// method to process encounters
+	/**
+     * This method processes the encounters between different critters
+     */
 	private static void processEncounters() {
 		int length = population.size();
 		if(length == 0) {
@@ -387,23 +412,34 @@ public abstract class Critter {
 		}
 	}
 	
-	// method to determine if an encounter should happen or not
-	// mostly needed to reduce "wordiness" in processEncounters 
+	/**
+     * This method processes whether an encounter even happens
+     * @param Critter c1 - a critter
+     * @param Critter c2 - a critter
+     */
 	private static boolean shouldEncounter(Critter c1, Critter c2) {
+		// method to determine if an encounter should happen or not
+		// mostly needed to reduce "wordiness" in processEncounters 
 		if((c1.x_coord==c2.x_coord)&&(c1.y_coord==c2.y_coord)&&(c2.getEnergy()<=0)) { // same location and second critter isn't dead (expected that critter 1 is alive)
 			return true;
 		}
 		return false;
 	}
 	
-	// records current location to previous location. This is mostly to reduce wordiness.
+	/**
+     * This method records previous location
+     */
 	private void recordPrevious() {
+		// records current location to previous location. This is mostly to reduce wordiness.
 		prev_x = x_coord;
 		prev_y = y_coord;
 	}
 	
-	// checks if a movement is the first for the turn and reverts it if it isn't. If there is a movement and it's the first one, indicate that critter moved in this step
+	/**
+     * This method stops movement past the first move
+     */
 	private void validateMovement() {
+		// checks if a movement is the first for the turn and reverts it if it isn't. If there is a movement and it's the first one, indicate that critter moved in this step
 		if(movedThisTurn && ((prev_x!=x_coord) || (prev_y!=y_coord))) { // return position to previous position
 			x_coord = prev_x;
 			y_coord = prev_y;

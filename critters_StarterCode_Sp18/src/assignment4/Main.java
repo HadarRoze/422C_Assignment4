@@ -38,6 +38,11 @@ public class Main {
         myPackage = Critter.class.getPackage().toString().split(" ")[1];
     }
     
+    /**
+     * This method determines whether a string is an integer
+     * @param s is a String to check
+     * @return boolean - true if the string is an integer
+     */
     private static boolean isInteger(String s) {
 		try {
 			Integer.parseInt(s);
@@ -51,6 +56,11 @@ public class Main {
     	return true;
     }
     
+    /**
+     * This method determines whether a string is a long
+     * @param s is a String to check
+     * @return boolean - true if the string is a long
+     */
     private static boolean isLong(String s) {
     	try {
 			Long.parseLong(s);
@@ -64,6 +74,11 @@ public class Main {
     	return true;
     }
     
+    /**
+     * This method displays stats
+     * @param s is a string of the name of a critter class
+     * @throws InvalidCritterException
+     */
     private static void StatRunner(String s) throws InvalidCritterException{
     	try {
     		Class<?> c = Class.forName(myPackage + "." + s);
@@ -77,7 +92,7 @@ public class Main {
     }
 
     /**
-     * Main method.
+     * Main method - manages the commands
      * @param args args can be empty.  If not empty, provide two parameters -- the first is a file name, 
      * and the second is test (for test output, where all output to be directed to a String), or nothing.
      */
