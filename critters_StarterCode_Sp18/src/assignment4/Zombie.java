@@ -1,6 +1,15 @@
 package assignment4;
 
 /*
+ * Hadar Rozenberg
+ * hr7358
+ * 15466
+ * Brandon Pham
+ * bp23792
+ * 15460
+ */
+
+/*
  * Zombies mindlessly attack anything that moves (so not Traps)
  * They reproduce in the step after having killed another critter 
  */

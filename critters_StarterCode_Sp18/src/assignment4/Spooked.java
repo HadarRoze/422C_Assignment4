@@ -1,6 +1,15 @@
 package assignment4;
 
 /*
+ * Hadar Rozenberg
+ * hr7358
+ * 15466
+ * Brandon Pham
+ * bp23792
+ * 15460
+ */
+
+/*
  * This is a very scared critter. It runs away from everything other than Algea, and only has the courage to move every 4 motionless turns.
  * After finding an Algae it'll reproduce.
  */

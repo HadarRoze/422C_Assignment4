@@ -1,6 +1,15 @@
 package assignment4;
 
 /*
+ * Hadar Rozenberg
+ * hr7358
+ * 15466
+ * Brandon Pham
+ * bp23792
+ * 15460
+ */
+
+/*
  * The wild card critter does everything in random. Nothing is set in stone, not its actions and not its parameters. 
  */
 
