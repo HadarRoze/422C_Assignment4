@@ -283,11 +283,11 @@ public abstract class Critter {
 		// remove dead critters
 		List<Critter> deads = new java.util.ArrayList<Critter>(); // might go out of bounds idk yet
 		for(Critter crit: population) {
-			if(crit.getEnergy()<=0) {
+			if(crit.energy<=0) {
 				deads.add(crit);
 			}
 		}
-		for(Critter dead: deads) { // could maybe do the thing where it erases it from dead as well because it came from pop but honestly i don't think java does that
+		for(Critter dead: deads) {
 			population.remove(dead);
 		}
 		// add babies to population
