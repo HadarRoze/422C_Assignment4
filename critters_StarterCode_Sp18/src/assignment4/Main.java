@@ -17,13 +17,72 @@ import java.awt.List;
 import java.io.*;
 import java.lang.reflect.Method;
 
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.event.*;
+import javafx.scene.*;
+import javafx.stage.Stage;
+import javafx.scene.canvas.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+
+public class Main extends Application{
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) {
+		final Canvas canvas = new Canvas(100,100);
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.setFill(Color.BLUE);
+		gc.fillRect(0,0,100,100);
+		GridPane gridpane = new GridPane();
+		//GridPane gridpane = new GridPane();
+		
+		
+		// map of critters
+		gridpane.add(canvas,0,0);
+		
+		// Creation menu
+		GridPane creation = new GridPane();
+		creation.add(new Label("New Critter:"), 0, 0);
+		creation.add(new Label("Type:"), 0, 1);
+		creation.add(new Label("Number:"), 2, 1);
+		ChoiceBox critter_types = new ChoiceBox(FXCollections.observableArrayList("Craig","Algea", "Trap", "Wild Card", "Zombie", "Spooked"));
+		creation.add(critter_types,1,1);
+		ChoiceBox critter_num = new ChoiceBox(FXCollections.observableArrayList("1","10", "100"));
+		creation.add(critter_num,3,1);
+		creation.add(new Button("Create"), 0, 2);
+		gridpane.add(creation, 0,1);
+		
+		// time step
+		GridPane time_step = new GridPane();
+		time_step.add(new Label("Time Step"), 0, 0);
+		time_step.add(new Label("Number of steps:"), 0, 1);
+		time_step.add(new Button("1"), 1, 1);
+		time_step.add(new Button("10"), 2, 1);
+		time_step.add(new Button("100"), 3, 1);
+		time_step.add(new Button("1000"), 4, 1);
+		gridpane.add(time_step, 0, 2);
+		
+		
+		Scene scene = new Scene(gridpane, 400, 400);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+}
+
+
 
 /*
  * Usage: java <pkgname>.Main <input file> test
  * input file is optional.  If input file is specified, the word 'test' is optional.
  * May not use 'test' argument without specifying input file.
  */
-public class Main {
+/*public class Main {
 
     static Scanner kb;	// scanner connected to keyboard input, or input file
     private static String inputFile;	// input file, used instead of keyboard input if specified
@@ -38,11 +97,7 @@ public class Main {
         myPackage = Critter.class.getPackage().toString().split(" ")[1];
     }
     
-    /**
-     * This method determines whether a string is an integer
-     * @param s is a String to check
-     * @return boolean - true if the string is an integer
-     */
+    
     private static boolean isInteger(String s) {
 		try {
 			Integer.parseInt(s);
@@ -56,11 +111,7 @@ public class Main {
     	return true;
     }
     
-    /**
-     * This method determines whether a string is a long
-     * @param s is a String to check
-     * @return boolean - true if the string is a long
-     */
+    
     private static boolean isLong(String s) {
     	try {
 			Long.parseLong(s);
@@ -74,11 +125,7 @@ public class Main {
     	return true;
     }
     
-    /**
-     * This method displays stats
-     * @param s is a string of the name of a critter class
-     * @throws InvalidCritterException
-     */
+    
     private static void StatRunner(String s) throws InvalidCritterException{
     	try {
     		Class<?> c = Class.forName(myPackage + "." + s);
@@ -91,11 +138,7 @@ public class Main {
     	}
     }
 
-    /**
-     * Main method - manages the commands
-     * @param args args can be empty.  If not empty, provide two parameters -- the first is a file name, 
-     * and the second is test (for test output, where all output to be directed to a String), or nothing.
-     */
+    
     public static void main(String[] args) { 
         if (args.length != 0) {
             try {
@@ -122,8 +165,7 @@ public class Main {
             kb = new Scanner(System.in); // use keyboard and console
         }
 
-        /* Do not alter the code above for your submission. */
-        /* Write your code below. */
+        
         
         // System.out.println(3/2);
         while(true) {
@@ -162,12 +204,7 @@ public class Main {
         	} 
         	
         	else if(cArray[0].equals("make")) { 
-    			/*for(int x = 0; x<100; x++) {					// this is only for stages 1 and 2 
-    				Critter.makeCritter(myPackage+".Craig");
-    			}
-    			for(int x = 0; x<25; x++) {
-    				Critter.makeCritter(myPackage+".Algae");
-    			}*/
+    			
     			if(cArray.length > 1 && cArray.length <= 3) {	// make <class_name> [<count>]
         			try {
         				String className = cArray[1];
@@ -217,8 +254,8 @@ public class Main {
         }
         
         
-        /* Write your code above */
+        
         System.out.flush();
 
     }
-}
+}*/

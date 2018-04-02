@@ -13,6 +13,7 @@ package assignment4;
  */
 
 
+import java.awt.Canvas;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -50,8 +51,7 @@ public abstract class Critter {
 	public javafx.scene.paint.Color viewOutlineColor() { return viewColor(); }
 	public javafx.scene.paint.Color viewFillColor() { return viewColor(); }
 	
-	// this is commented out to avoid errors at the moment
-	// public abstract CritterShape viewShape(); 
+	public abstract CritterShape viewShape(); 
 
 	
 	
@@ -431,6 +431,8 @@ public abstract class Critter {
 			}
 			System.out.print("\n"); // did they mean print or just out? need to check this
 		}
+		//javafx.scene.canvas.Canvas cnvs = new javafx.scene.canvas.Canvas(Params.world_height, Params.world_width);
+		
 	}
 	
 	/**

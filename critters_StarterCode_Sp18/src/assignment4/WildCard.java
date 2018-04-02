@@ -1,5 +1,7 @@
 package assignment4;
 
+import assignment4.Critter.CritterShape;
+
 /*
  * Hadar Rozenberg
  * hr7358
@@ -54,5 +56,17 @@ public class WildCard extends Critter{
      */
 	public String toString() {
 		return "W";
+	}
+	
+	// for Project 5
+	public javafx.scene.paint.Color viewOutlineColor() { 
+		return javafx.scene.paint.Color.RED; 
+	}
+	public javafx.scene.paint.Color viewFillColor() { 
+		return javafx.scene.paint.Color.BLUE; 
+	}
+				
+	public CritterShape viewShape() {
+		return CritterShape.STAR;
 	}
 }

@@ -1,5 +1,6 @@
 package assignment4;
 
+import assignment4.Critter.CritterShape;
 
 /*
  * Example critter
@@ -73,5 +74,17 @@ public class Craig extends Critter {
 		System.out.print("" + total_right / (GENE_TOTAL * 0.01 * craigs.size()) + "% right   ");
 		System.out.print("" + total_left / (GENE_TOTAL * 0.01 * craigs.size()) + "% left   ");
 		System.out.println();
+	}
+	
+	// for Project 5
+	public javafx.scene.paint.Color viewOutlineColor() { 
+		return javafx.scene.paint.Color.RED; 
+	}
+	public javafx.scene.paint.Color viewFillColor() { 
+		return javafx.scene.paint.Color.RED; 
+	}
+				
+	public CritterShape viewShape() {
+		return CritterShape.SQUARE;
 	}
 }

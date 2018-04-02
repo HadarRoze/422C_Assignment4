@@ -1,5 +1,7 @@
 package assignment4;
 
+import assignment4.Critter.CritterShape;
+
 /*
  * Hadar Rozenberg
  * hr7358
@@ -48,5 +50,17 @@ public class Trap extends Critter{
      */
 	public String toString() {
 		return "T";
+	}
+	
+	// for Project 5
+	public javafx.scene.paint.Color viewOutlineColor() { 
+		return javafx.scene.paint.Color.BLACK; 
+	}
+	public javafx.scene.paint.Color viewFillColor() { 
+		return javafx.scene.paint.Color.BLACK; 
+	}
+				
+	public CritterShape viewShape() {
+		return CritterShape.DIAMOND;
 	}
 }

@@ -1,5 +1,7 @@
 package assignment4;
 
+import assignment4.Critter.CritterShape;
+
 /*
  * Hadar Rozenberg
  * hr7358
@@ -55,5 +57,17 @@ public class Zombie extends Critter{
      */
 	public String toString() {
 		return "Z";
+	}
+	
+	// for Project 5
+	public javafx.scene.paint.Color viewOutlineColor() { 
+		return javafx.scene.paint.Color.YELLOWGREEN;
+	}
+	public javafx.scene.paint.Color viewFillColor() { 
+		return javafx.scene.paint.Color.YELLOWGREEN; 
+	}
+				
+	public CritterShape viewShape() {
+		return CritterShape.CIRCLE;
 	}
 }

@@ -1,5 +1,7 @@
 package assignment4;
 
+import assignment4.Critter.CritterShape;
+
 /*
  * Hadar Rozenberg
  * hr7358
@@ -56,5 +58,17 @@ public class Spooked extends Critter{
      */
 	public String toString() {
 		return "S";
+	}
+	
+	// for Project 5
+	public javafx.scene.paint.Color viewOutlineColor() { 
+		return javafx.scene.paint.Color.YELLOW;
+	}
+	public javafx.scene.paint.Color viewFillColor() { 
+		return javafx.scene.paint.Color.YELLOW; 
+	}
+			
+	public CritterShape viewShape() {
+		return CritterShape.TRIANGLE;
 	}
 }

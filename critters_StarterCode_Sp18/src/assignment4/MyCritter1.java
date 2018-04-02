@@ -2,6 +2,8 @@ package assignment4;
 
 import java.util.*;
 
+import assignment4.Critter.CritterShape;
+
 public class MyCritter1 extends Critter.TestCritter {
 
 	@Override
@@ -22,4 +24,12 @@ public class MyCritter1 extends Critter.TestCritter {
 	public void test (List<Critter> l) {
 		
 	}
+	
+	// for Project 5
+		public javafx.scene.paint.Color viewOutlineColor() { return viewColor(); }
+		public javafx.scene.paint.Color viewFillColor() { return viewColor(); }
+		
+		public CritterShape viewShape() {
+			return null;
+		}
 }
