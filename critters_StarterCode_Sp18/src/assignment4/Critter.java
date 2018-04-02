@@ -22,6 +22,39 @@ import java.util.List;
 
 
 public abstract class Critter {
+	/*
+	 * PROJECT 5 ADDITIONS
+	 */
+	public enum CritterShape {
+		CIRCLE,
+		SQUARE,
+		TRIANGLE,
+		DIAMOND,
+		STAR
+	}
+	/* the default color is white, which I hope makes critters invisible by default
+	 * If you change the background color of your View component, then update the default
+	 * color to be the same as you background 
+	 * 
+	 * critters must override at least one of the following three methods, it is not 
+	 * proper for critters to remain invisible in the view
+	 * 
+	 * If a critter only overrides the outline color, then it will look like a non-filled 
+	 * shape, at least, that's the intent. You can edit these default methods however you 
+	 * need to, but please preserve that intent as you implement them. 
+	 */
+	public javafx.scene.paint.Color viewColor() { 
+		return javafx.scene.paint.Color.WHITE; 
+	}
+	
+	public javafx.scene.paint.Color viewOutlineColor() { return viewColor(); }
+	public javafx.scene.paint.Color viewFillColor() { return viewColor(); }
+	
+	// this is commented out to avoid errors at the moment
+	// public abstract CritterShape viewShape(); 
+
+	
+	
 	private static String myPackage;
 	private	static List<Critter> population = new java.util.ArrayList<Critter>();
 	private static List<Critter> babies = new java.util.ArrayList<Critter>();
@@ -34,6 +67,11 @@ public abstract class Critter {
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
+	
+	// NEW FOR PROJECT 5
+	protected final String look(int direction, boolean steps) {return "";}
+
+	
 	
 	private static java.util.Random rand = new java.util.Random();
 	public static int getRandomInt(int max) {
@@ -456,4 +494,21 @@ public abstract class Critter {
 			movedThisTurn = true;
 		}
 	}
+	
+	/**
+	 * Looks for critter in location (x,y)
+	 * @param x x coords 
+	 * @param y y coords
+	 * @return Critter in location (x,y) or null if none. 
+	 */
+	private Critter critterInLoc(int x, int y) {
+		for(Critter c: population) {
+			if((c.x_coord == x)&&(c.y_coord == y)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	
 }
