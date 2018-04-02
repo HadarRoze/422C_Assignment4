@@ -63,13 +63,36 @@ public abstract class Critter {
 	private int prev_x;
 	private int prev_y;
 	private boolean movedThisTurn;
+	private static List<Critter> past = new java.util.ArrayList<Critter>();
+	
 	// Gets the package name.  This assumes that Critter and its subclasses are all in the same package.
 	static {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
 	
 	// NEW FOR PROJECT 5
-	protected final String look(int direction, boolean steps) {return "";}
+	protected final String look(int direction, boolean steps) {
+		// assuming critter has enough energy to do this
+		// remove energy for look
+		energy-=Params.look_energy_cost;
+		// determine distance 
+		int distance;
+		if(steps) {
+			distance = 1;
+		} else {
+			distance = 2; 
+		}
+		// find location
+		int tempx = x_coord;
+		int tempy = y_coord;
+		// ----------------use 'movement' code for this 
+		Critter temp = this.critterInLoc(tempx, tempy); // this looks in past, but if this is called from fight it should look from population
+		if(temp == null) {
+			return null;
+		} else {
+			return temp.toString();
+		}
+	}
 
 	
 	
@@ -329,6 +352,11 @@ public abstract class Critter {
      * This method simulates a step in time for the critters
      */
 	public static void worldTimeStep() {
+		// copy all critters to "past" 
+		past.clear();
+		for(Critter c: population) {
+			past.add(c);
+		}
 		// execute timeStep for all living critters
 		for(Critter crit: population) { 
 			crit.recordPrevious();
@@ -502,7 +530,7 @@ public abstract class Critter {
 	 * @return Critter in location (x,y) or null if none. 
 	 */
 	private Critter critterInLoc(int x, int y) {
-		for(Critter c: population) {
+		for(Critter c: past) {
 			if((c.x_coord == x)&&(c.y_coord == y)) {
 				return c;
 			}
