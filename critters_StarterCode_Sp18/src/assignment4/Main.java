@@ -21,6 +21,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.*;
 import javafx.scene.*;
+import javafx.scene.input.*;
 import javafx.stage.Stage;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
@@ -28,7 +29,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 
 public class Main extends Application{
-
+	// getting package
+	private static String myPackage;	// package of Critter file.  Critter cannot be in default pkg. 
+	static {
+	        myPackage = Critter.class.getPackage().toString().split(" ")[1];
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -46,32 +52,105 @@ public class Main extends Application{
 		// map of critters
 		gridpane.add(canvas,0,0);
 		
-		// Creation menu
+		// ------Creation menu
+		// choicebox content
+		javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();
+		c_types.addAll("Craig","Algea", "Trap", "Wild Card", "Zombie", "Spooked");
+		javafx.collections.ObservableList<Integer> c_num = FXCollections.observableArrayList();
+		c_num.addAll(1,10,100);
+		
 		GridPane creation = new GridPane();
 		creation.add(new Label("New Critter:"), 0, 0);
 		creation.add(new Label("Type:"), 0, 1);
 		creation.add(new Label("Number:"), 2, 1);
-		ChoiceBox critter_types = new ChoiceBox(FXCollections.observableArrayList("Craig","Algea", "Trap", "Wild Card", "Zombie", "Spooked"));
+		ChoiceBox critter_types = new ChoiceBox(c_types);
+		critter_types.setValue("Craig");
 		creation.add(critter_types,1,1);
-		ChoiceBox critter_num = new ChoiceBox(FXCollections.observableArrayList("1","10", "100"));
+		ChoiceBox critter_num = new ChoiceBox(c_num);
+		critter_num.setValue(1);
 		creation.add(critter_num,3,1);
-		creation.add(new Button("Create"), 0, 2);
+		Button create_critter = new Button("Create");
+		creation.add(create_critter, 0, 2);
 		gridpane.add(creation, 0,1);
 		
 		// time step
 		GridPane time_step = new GridPane();
 		time_step.add(new Label("Time Step"), 0, 0);
 		time_step.add(new Label("Number of steps:"), 0, 1);
-		time_step.add(new Button("1"), 1, 1);
-		time_step.add(new Button("10"), 2, 1);
-		time_step.add(new Button("100"), 3, 1);
-		time_step.add(new Button("1000"), 4, 1);
+		Button time_step_1 = new Button("1");
+		Button time_step_10 = new Button("10");
+		Button time_step_100 = new Button("100");
+		Button time_step_1000 = new Button("1000");
+		time_step.add(time_step_1, 1, 1);
+		time_step.add(time_step_10, 2, 1);
+		time_step.add(time_step_100, 3, 1);
+		time_step.add(time_step_1000, 4, 1);
 		gridpane.add(time_step, 0, 2);
 		
 		
 		Scene scene = new Scene(gridpane, 400, 400);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		// -----Controller
+		/**
+		 * Controller for "create" button, creates critter
+		 */
+		create_critter.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent e) {
+				String type = (String) critter_types.getValue();
+				int num = (int) critter_num.getValue();
+				
+				try {
+    					for(int i = 0; i < num; i++) {
+    						Critter.makeCritter(myPackage + "." + type);
+    					}
+    				}
+    			catch (InvalidCritterException err) {} 
+				// call display world
+			}
+		});
+		
+		/**
+		 * Controller for "1" button, executes one time step
+		 */
+		time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				
+			}
+		});
+		
+		/**
+		 * Controller for "10" button, executes 10 time steps
+		 */
+		time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				
+			}
+		});
+		
+		/**
+		 * Controller for "100" button, executes 100 time steps
+		 */
+		time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				
+			}
+		});
+		
+		/**
+		 * Controller for "1000" button, executes 1000 time steps
+		 */
+		time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				
+			}
+		});
 	}
 }
 

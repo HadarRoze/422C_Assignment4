@@ -400,8 +400,10 @@ public abstract class Critter {
 	/**
      * This method displays the critter's world
      */
-	public static void displayWorld() {
-		// Complete this method
+	public static void displayWorld(javafx.scene.layout.StackPane stackpane) {
+		
+		
+		/*// Complete this method
 		// create parameters for the grid
 		int height = Params.world_height + 2;
 		int width = Params.world_width + 2;
@@ -430,8 +432,7 @@ public abstract class Critter {
 				System.out.print(viewedWorld[y][x]);
 			}
 			System.out.print("\n"); // did they mean print or just out? need to check this
-		}
-		//javafx.scene.canvas.Canvas cnvs = new javafx.scene.canvas.Canvas(Params.world_height, Params.world_width);
+		}*/
 		
 	}
 	
