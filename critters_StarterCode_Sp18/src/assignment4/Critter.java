@@ -130,13 +130,13 @@ public abstract class Critter {
 		if(energy >= cost) {
 			switch(direction) {
 					
-				case 0: x_coord += distance;																				//Right
+				case 0: x_coord += distance;																	//Right
 						if(x_coord >= Params.world_width) {
 							x_coord -= Params.world_width;
 						}
 						break;
 								
-				case 1: x_coord += distance;																				//Right, Up
+				case 1: x_coord += distance;																	//Right, Up
 						y_coord -= distance;
 						if(x_coord >= Params.world_width) {
 							x_coord -= Params.world_width;
@@ -146,13 +146,13 @@ public abstract class Critter {
 						}
 						break;
 								
-				case 2: y_coord -= distance;
+				case 2: y_coord -= distance;																	//Up
 						if(y_coord < 0) {
 							y_coord += Params.world_height;
 						}
 						break;
 								
-				case 3: x_coord -= distance;																				//Left, Up
+				case 3: x_coord -= distance;																	//Left, Up
 						y_coord -= distance;
 						if(x_coord < 0) {
 							x_coord += Params.world_width;
@@ -162,13 +162,13 @@ public abstract class Critter {
 						}
 						break;
 								
-				case 4: x_coord -= distance;																				//Left
+				case 4: x_coord -= distance;																	//Left
 						if(x_coord < 0) {
 							x_coord += Params.world_width;
 						}
 						break;
 								
-				case 5: x_coord -= distance;
+				case 5: x_coord -= distance;																	//Left, Down
 						y_coord += distance;
 						if(x_coord < 0) {
 							x_coord += Params.world_width;
@@ -184,17 +184,17 @@ public abstract class Critter {
 						}
 						break;
 						
-				case 7: x_coord += distance;
+				case 7: x_coord += distance;																	//Right, Down
 						y_coord += distance;
 						if(x_coord >= Params.world_width) {
 							x_coord -= Params.world_width;
 						}
-						if(y_coord >= Params.world_height) {													//Down
+						if(y_coord >= Params.world_height) {													
 							y_coord -= Params.world_height;
 						}
 						break;
 								
-				default: break;																								//If invalid, do nothing
+				default: break;																					//If invalid, do nothing
 			}
 		}		
 	}
