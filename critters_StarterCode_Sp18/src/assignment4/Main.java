@@ -88,14 +88,6 @@ public class Main extends Application{
 		time_step.add(new Label(""), 0, 0);
 		time_step.add(new Label("Time Step"), 0, 1);
 		time_step.add(new Label("Number of steps:"), 0, 2);
-		/*Button time_step_1 = new Button("1");															// Use text field instead of buttons
-		Button time_step_10 = new Button("10");
-		Button time_step_100 = new Button("100");
-		Button time_step_1000 = new Button("1000");
-		time_step.add(time_step_1, 1, 1);
-		time_step.add(time_step_10, 2, 1);
-		time_step.add(time_step_100, 3, 1);
-		time_step.add(time_step_1000, 4, 1);*/
 		TextField num_steps = new TextField();
 		num_steps.setPromptText("Enter Number of Steps");
 		num_steps.setPrefWidth(150);
@@ -103,6 +95,19 @@ public class Main extends Application{
 		Button step = new Button("Step");
 		time_step.add(step, 2, 2);
 		gridpane.add(time_step, 0, 2);
+		
+		
+	 	GridPane step_butts = new GridPane();
+	 	step_butts.add(new Label("Quick steps:        "), 0, 0);
+		Button time_step_1 = new Button("1");															
+		Button time_step_10 = new Button("10");
+		Button time_step_100 = new Button("100");
+		Button time_step_1000 = new Button("1000");
+		step_butts.add(time_step_1, 1, 0);
+		step_butts.add(time_step_10, 2, 0);
+		step_butts.add(time_step_100, 3, 0);
+		step_butts.add(time_step_1000, 4, 0);
+		gridpane.add(step_butts, 0, 3);
 		
 		
 		Scene scene = new Scene(gridpane, 1600, 1000);
@@ -148,42 +153,42 @@ public class Main extends Application{
 		/**
 		 * Controller for "1" button, executes one time step
 		 */
-		/*time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});*/
+		});
 		
 		/**
 		 * Controller for "10" button, executes 10 time steps
 		 */
-		/*time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});*/
+		});
 		
 		/**
 		 * Controller for "100" button, executes 100 time steps
 		 */
-		/*time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});*/
+		});
 		
 		/**
 		 * Controller for "1000" button, executes 1000 time steps
 		 */
-		/*time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});*/
+		});
 	}
 	
 	private static boolean isInteger(String s) {
