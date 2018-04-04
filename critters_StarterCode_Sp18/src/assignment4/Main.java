@@ -42,13 +42,7 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
-		/*final Canvas canvas = new Canvas(100,100);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.setFill(Color.BLUE);
-		gc.fillRect(0,0,100,100);*/
 		GridPane gridpane = new GridPane();
-		//GridPane gridpane = new GridPane();
-		
 		
 		// map of critters
 		GridPane world = new GridPane();
@@ -56,9 +50,6 @@ public class Main extends Application{
 		gridpane.add(world,0,0);
 		
 		// ------Creation menu
-		// choicebox content
-		//javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();		// Use text field instead of choice box
-		//c_types.addAll("Craig","Algae", "Trap", "WildCard", "Zombie", "Spooked");
 		javafx.collections.ObservableList<Integer> c_num = FXCollections.observableArrayList();
 		c_num.addAll(1,10,100);
 		
@@ -113,6 +104,21 @@ public class Main extends Application{
 		step_butts.add(time_step_1000, 4, 0);
 		gridpane.add(step_butts, 0, 3);
 		
+		GridPane animation = new GridPane();
+		javafx.collections.ObservableList<Integer> ts_sizes = FXCollections.observableArrayList();		// Use text field instead of choice box
+		ts_sizes.addAll(1,2,5,10,20,50,100);
+		ChoiceBox frame_choice = new ChoiceBox(ts_sizes);
+		frame_choice.setValue(1);
+		animation.add(new Label("Animate"), 0, 0);
+		animation.add(new Label("Choose animation speed: "), 0, 1);
+		animation.add(frame_choice, 1, 1);
+		Button startAnimation = new Button("Start Animation");
+		Button stopAnimation = new Button("Stop Animation");
+		animation.add(startAnimation, 2,1);
+		animation.add(stopAnimation, 3, 1);
+		gridpane.add(animation, 0, 4);
+		
+		
 		GridPane RunStats = new GridPane();
 		RunStats.add(new Label(""), 0, 0);
 		RunStats.add(new Label("Run Stats"), 0, 1);
@@ -123,7 +129,7 @@ public class Main extends Application{
 		Button run = new Button("Manual Run Stats");
 		RunStats.add(critter_types2, 1, 2);
 		RunStats.add(run, 2,2);
-		gridpane.add(RunStats, 0, 4);
+		gridpane.add(RunStats, 0, 5);
 		
 		GridPane statsDisplay = new GridPane();
 		Text stats = new Text();
@@ -132,7 +138,7 @@ public class Main extends Application{
 		statsDisplay.add(stats, 0, 0);
 		Button quitter = new Button("Quit");
 		statsDisplay.add(quitter, 1, 0);
-		gridpane.add(statsDisplay, 0, 5);
+		gridpane.add(statsDisplay, 0, 6);
 		
 		int scale = getScale();
 		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+200);
@@ -261,6 +267,49 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		/**
+		 * 
+		 */
+		startAnimation.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				// disable all controls other than 'Stop Animation'
+				creation.setDisable(true);
+				time_step.setDisable(true);
+				step_butts.setDisable(true);
+				RunStats.setDisable(true);
+				statsDisplay.setDisable(true);
+				frame_choice.setDisable(true);
+				startAnimation.setDisable(true);
+				
+				int speed = (int) frame_choice.getValue();
+				
+				while(true) {
+					for(int x = 0; x < speed; x++) {
+						Critter.worldTimeStep();
+					}
+					if(!time_step.isDisable()) {
+						break;
+					}
+					// delay function goes here
+					Critter.displayWorld(world);
+				}
+			}
+		});
+		
+		stopAnimation.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				creation.setDisable(false);
+				time_step.setDisable(false);
+				step_butts.setDisable(false);
+				RunStats.setDisable(false);
+				statsDisplay.setDisable(false);
+				frame_choice.setDisable(false);
+				startAnimation.setDisable(false);
 			}
 		});
 	}
