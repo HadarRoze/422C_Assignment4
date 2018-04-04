@@ -88,8 +88,78 @@ public abstract class Critter {
 		// find location
 		int tempx = x_coord;
 		int tempy = y_coord;
-		// ----------------use 'movement' code for this 
-		Critter temp = this.critterInLoc(tempx, tempy); // this looks in past, but if this is called from fight it should look from population
+		if(energy >= Params.look_energy_cost) {
+			energy -= Params.look_energy_cost;
+			switch(direction) {
+					
+				case 0: tempx += distance;																	//Right
+						if(tempx >= Params.world_width) {
+							tempx -= Params.world_width;
+						}
+						break;
+								
+				case 1: tempx += distance;																	//Right, Up
+						tempy -= distance;
+						if(tempx >= Params.world_width) {
+							tempx -= Params.world_width;
+						}
+						if(tempy < 0) {
+							tempy += Params.world_height;
+						}
+						break;
+								
+				case 2: tempy -= distance;																	//Up
+						if(tempy < 0) {
+							tempy += Params.world_height;
+						}
+						break;
+								
+				case 3: tempx -= distance;																	//Left, Up
+						tempy -= distance;
+						if(tempx < 0) {
+							tempx += Params.world_width;
+						}
+						if(tempy < 0) {
+							tempy += Params.world_height;
+						}
+						break;
+								
+				case 4: tempx -= distance;																	//Left
+						if(tempx < 0) {
+							tempx += Params.world_width;
+						}
+						break;
+								
+				case 5: tempx -= distance;																	//Left, Down
+						tempy += distance;
+						if(tempx < 0) {
+							tempx += Params.world_width;
+						}
+						if(tempy >= Params.world_height) {
+							tempy -= Params.world_height;
+						}
+						break;
+						
+				case 6: tempy += distance;
+						if(tempy >= Params.world_height) {													//Down
+							tempy -= Params.world_height;
+						}
+						break;
+						
+				case 7: tempx += distance;																	//Right, Down
+						tempy += distance;
+						if(tempx >= Params.world_width) {
+							tempx -= Params.world_width;
+						}
+						if(tempy >= Params.world_height) {													
+							tempy -= Params.world_height;
+						}
+						break;
+								
+				default: break;																					//If invalid, do nothing
+			}
+		}
+		Critter temp = this.critterInLoc(tempx, tempy);
 		if(temp == null) {
 			return null;
 		} else {
