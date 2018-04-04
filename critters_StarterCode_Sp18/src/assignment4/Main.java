@@ -233,6 +233,16 @@ public class Main extends Application{
 				stats.setText("Running Stats for " + name);
 			}
 		});
+		
+		/**
+		 * Controller for "Quit" button, exits program
+		 */
+		quitter.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 	}
 	
 	private static boolean isInteger(String s) {
