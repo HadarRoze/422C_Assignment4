@@ -63,25 +63,28 @@ public class Main extends Application{
 		c_num.addAll(1,10,100);
 		
 		GridPane creation = new GridPane();
-		creation.add(new Label("New Critter:"), 0, 0);
+		creation.add(new Label("New Critter"), 0, 0);
+		creation.add(new Label("   Seed: "), 5, 1);
 		creation.add(new Label("Type:"), 0, 1);
-		creation.add(new Label("   Number:   "), 2, 1);
-		//ChoiceBox critter_types = new ChoiceBox(c_types);												// Use text field instead of choice box
-		//critter_types.setValue("Craig");
-		//creation.add(critter_types,1,1);
+		creation.add(new Label("   Number: "), 2, 1);
 		TextField critter_types = new TextField();
 		critter_types.setPromptText("Enter Critter Type");
 		critter_types.setPrefWidth(150);
 		creation.add(critter_types, 1, 1);
-		//ChoiceBox critter_num = new ChoiceBox(c_num);
-		//critter_num.setValue(1);
-		//creation.add(critter_num,3,1);
 		TextField num_crit = new TextField();
 		num_crit.setPromptText("Enter Number of Critters");
 		num_crit.setPrefWidth(150);
 		creation.add(num_crit, 3, 1);
+		TextField seed = new TextField();
+		seed.setPromptText("Enter Seed");
+		seed.setPrefWidth(150);
+		creation.add(seed, 6, 1);
 		Button create_critter = new Button("Create");
+		Button setSeed = new Button("Set");
 		creation.add(create_critter, 4, 1);
+		creation.add(setSeed, 7, 1);
+		
+		
 		gridpane.add(creation, 0,1);
 		
 		// time step
@@ -125,10 +128,13 @@ public class Main extends Application{
 		GridPane statsDisplay = new GridPane();
 		Text stats = new Text();
 		stats.setText("Stats will be displayed here");
+		stats.setWrappingWidth(1560);
 		statsDisplay.add(stats, 0, 0);
+		Button quitter = new Button("Quit");
+		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 5);
 		
-		Scene scene = new Scene(gridpane, 1600, 1005);
+		Scene scene = new Scene(gridpane, 1600, 1010);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -151,6 +157,16 @@ public class Main extends Application{
 					catch (InvalidCritterException err) {} 
 					Critter.displayWorld(world);
 				}
+			}
+		});
+		
+		/**
+		 * Controller for "Set" button, sets Seed
+		 */
+		setSeed.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent e) {
+				System.out.println("Seed Set: " + seed.getText());
 			}
 		});
 		
