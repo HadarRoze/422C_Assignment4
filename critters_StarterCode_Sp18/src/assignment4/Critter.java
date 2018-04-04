@@ -459,7 +459,6 @@ public abstract class Critter {
 					gc.strokePolygon(x_dia, y_dia, 4);
 					break;
 				case STAR:
-					//					1: Far left				2: Upper Middle Left	3: Top Center			4: Upper Middle Right	5: Far Right			6: Lower Middle Right	7: Lower Far Right		8: Center Middle		9: Lower Far Left		10: Lower Middle Left
 					double x_sta[] =	{c.x_coord*scale, 		(c.x_coord+.4)*scale, 	(c.x_coord+.5)*scale,	(c.x_coord+.6)*scale,	(c.x_coord+1)*scale,	(c.x_coord+.7)*scale,	(c.x_coord+.8)*scale,	(c.x_coord+.5)*scale,	(c.x_coord+.2)*scale,	(c.x_coord+.3)*scale};
 					double y_sta[] =	{(c.y_coord+.3)*scale, 	(c.y_coord+.3)*scale, 	(c.y_coord)*scale, 		(c.y_coord+.3)*scale, 	(c.y_coord+.3)*scale,	(c.y_coord+.6)*scale,	(c.y_coord+.9)*scale, 	(c.y_coord+.7)*scale, 	(c.y_coord+.9)*scale,	(c.y_coord+.6)*scale};
 					gc.fillPolygon(x_sta, y_sta, 10);

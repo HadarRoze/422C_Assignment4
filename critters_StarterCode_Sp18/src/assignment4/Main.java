@@ -56,37 +56,52 @@ public class Main extends Application{
 		
 		// ------Creation menu
 		// choicebox content
-		javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();
-		c_types.addAll("Craig","Algae", "Trap", "WildCard", "Zombie", "Spooked");
+		//javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();		// Use text field instead of choice box
+		//c_types.addAll("Craig","Algae", "Trap", "WildCard", "Zombie", "Spooked");
 		javafx.collections.ObservableList<Integer> c_num = FXCollections.observableArrayList();
 		c_num.addAll(1,10,100);
 		
 		GridPane creation = new GridPane();
 		creation.add(new Label("New Critter:"), 0, 0);
 		creation.add(new Label("Type:"), 0, 1);
-		creation.add(new Label("Number:"), 2, 1);
-		ChoiceBox critter_types = new ChoiceBox(c_types);
-		critter_types.setValue("Craig");
-		creation.add(critter_types,1,1);
-		ChoiceBox critter_num = new ChoiceBox(c_num);
-		critter_num.setValue(1);
-		creation.add(critter_num,3,1);
+		creation.add(new Label("   Number:   "), 2, 1);
+		//ChoiceBox critter_types = new ChoiceBox(c_types);												// Use text field instead of choice box
+		//critter_types.setValue("Craig");
+		//creation.add(critter_types,1,1);
+		TextField critter_types = new TextField();
+		critter_types.setPromptText("Enter Critter Type");
+		critter_types.setPrefWidth(150);
+		creation.add(critter_types, 1, 1);
+		//ChoiceBox critter_num = new ChoiceBox(c_num);
+		//critter_num.setValue(1);
+		//creation.add(critter_num,3,1);
+		TextField num_crit = new TextField();
+		num_crit.setPromptText("Enter Number of Critters");
+		num_crit.setPrefWidth(150);
+		creation.add(num_crit, 3, 1);
 		Button create_critter = new Button("Create");
 		creation.add(create_critter, 0, 2);
 		gridpane.add(creation, 0,1);
 		
 		// time step
 		GridPane time_step = new GridPane();
-		time_step.add(new Label("Time Step"), 0, 0);
-		time_step.add(new Label("Number of steps:"), 0, 1);
-		Button time_step_1 = new Button("1");
+		time_step.add(new Label(""), 0, 0);
+		time_step.add(new Label("Time Step"), 0, 1);
+		time_step.add(new Label("Number of steps:"), 0, 2);
+		/*Button time_step_1 = new Button("1");															// Use text field instead of buttons
 		Button time_step_10 = new Button("10");
 		Button time_step_100 = new Button("100");
 		Button time_step_1000 = new Button("1000");
 		time_step.add(time_step_1, 1, 1);
 		time_step.add(time_step_10, 2, 1);
 		time_step.add(time_step_100, 3, 1);
-		time_step.add(time_step_1000, 4, 1);
+		time_step.add(time_step_1000, 4, 1);*/
+		TextField num_steps = new TextField();
+		num_steps.setPromptText("Enter Number of Steps");
+		num_steps.setPrefWidth(150);
+		time_step.add(num_steps, 1, 2);
+		Button step = new Button("Step");
+		time_step.add(step, 2, 2);
 		gridpane.add(time_step, 0, 2);
 		
 		
@@ -101,59 +116,88 @@ public class Main extends Application{
 		create_critter.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent e) {
-				String type = (String) critter_types.getValue();
-				int num = (int) critter_num.getValue();
-				
-				try {
-    					for(int i = 0; i < num; i++) {
-    						Critter.makeCritter(myPackage + "." + type);
-    					}
-    				}
-    			catch (InvalidCritterException err) {} 
-				Critter.displayWorld(world);
+				String sNum = (String) num_crit.getText();
+				if(isInteger(sNum)) {
+					String type = critter_types.getText();
+					int num = Integer.parseInt(sNum);
+					try {
+						for(int i = 0; i < num; i++) {
+							System.out.println(myPackage + "." + type);
+							Critter.makeCritter(myPackage + "." + type);
+						}
+					}
+					catch (InvalidCritterException err) {} 
+					Critter.displayWorld(world);
+				}
+			}
+		});
+		
+		/**
+		 * Controller for "step" button, executes one time step
+		 */
+		step.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				String steps = num_steps.getText();
+				if(isInteger(steps)) {
+					System.out.println("Stepping " + steps + " times");
+				}
 			}
 		});
 		
 		/**
 		 * Controller for "1" button, executes one time step
 		 */
-		time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/*time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});
+		});*/
 		
 		/**
 		 * Controller for "10" button, executes 10 time steps
 		 */
-		time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/*time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});
+		});*/
 		
 		/**
 		 * Controller for "100" button, executes 100 time steps
 		 */
-		time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/*time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});
+		});*/
 		
 		/**
 		 * Controller for "1000" button, executes 1000 time steps
 		 */
-		time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		/*time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
 				
 			}
-		});
+		});*/
 	}
+	
+	private static boolean isInteger(String s) {
+		try {
+			Integer.parseInt(s);
+		}
+		catch (NumberFormatException e) {
+			return false;
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
+    	return true;
+    }
 }
 
 
