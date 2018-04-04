@@ -67,6 +67,6 @@ public class WildCard extends Critter{
 	}
 				
 	public CritterShape viewShape() {
-		return CritterShape.DIAMOND;
+		return CritterShape.STAR;
 	}
 }

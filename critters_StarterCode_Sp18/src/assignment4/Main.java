@@ -57,7 +57,7 @@ public class Main extends Application{
 		// ------Creation menu
 		// choicebox content
 		javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();
-		c_types.addAll("Craig","Algae", "Trap", "Wild Card", "Zombie", "Spooked");
+		c_types.addAll("Craig","Algae", "Trap", "WildCard", "Zombie", "Spooked");
 		javafx.collections.ObservableList<Integer> c_num = FXCollections.observableArrayList();
 		c_num.addAll(1,10,100);
 		

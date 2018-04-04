@@ -438,26 +438,33 @@ public abstract class Critter {
 			gc.setFill(c.viewFillColor());
 			gc.setStroke(c.viewOutlineColor());
 			switch(c.viewShape()) {
-			case SQUARE:
-				gc.fillRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
-				gc.strokeRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
-				break;
-			case CIRCLE:
-				gc.fillOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
-				gc.strokeOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
-				break;
-			case TRIANGLE:
-				double x_tri[] = {c.x_coord*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
-				double y_tri[] = {(c.y_coord+1)*scale, (c.y_coord+1)*scale, (c.y_coord)*scale};
-				gc.fillPolygon(x_tri, y_tri, 3);
-				gc.strokePolygon(x_tri, y_tri, 3);
-				break;
-			case DIAMOND:
-				double x_dia[] = {c.x_coord*scale, (c.x_coord+.5)*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
-				double y_dia[] = {(c.y_coord+.5)*scale, c.y_coord*scale, (c.y_coord+.5)*scale, (c.y_coord+1)*scale};
-				gc.fillPolygon(x_dia, y_dia, 4);
-				gc.strokePolygon(x_dia, y_dia, 4);
-				break;
+				case SQUARE:
+					gc.fillRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
+					gc.strokeRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
+					break;
+				case CIRCLE:
+					gc.fillOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
+					gc.strokeOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
+					break;
+				case TRIANGLE:
+					double x_tri[] = {c.x_coord*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
+					double y_tri[] = {(c.y_coord+1)*scale, (c.y_coord+1)*scale, (c.y_coord)*scale};
+					gc.fillPolygon(x_tri, y_tri, 3);
+					gc.strokePolygon(x_tri, y_tri, 3);
+					break;
+				case DIAMOND:
+					double x_dia[] = {c.x_coord*scale, (c.x_coord+.5)*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
+					double y_dia[] = {(c.y_coord+.5)*scale, c.y_coord*scale, (c.y_coord+.5)*scale, (c.y_coord+1)*scale};
+					gc.fillPolygon(x_dia, y_dia, 4);
+					gc.strokePolygon(x_dia, y_dia, 4);
+					break;
+				case STAR:
+					//					1: Far left				2: Upper Middle Left	3: Top Center			4: Upper Middle Right	5: Far Right			6: Lower Middle Right	7: Lower Far Right		8: Center Middle		9: Lower Far Left		10: Lower Middle Left
+					double x_sta[] =	{c.x_coord*scale, 		(c.x_coord+.4)*scale, 	(c.x_coord+.5)*scale,	(c.x_coord+.6)*scale,	(c.x_coord+1)*scale,	(c.x_coord+.7)*scale,	(c.x_coord+.8)*scale,	(c.x_coord+.5)*scale,	(c.x_coord+.2)*scale,	(c.x_coord+.3)*scale};
+					double y_sta[] =	{(c.y_coord+.3)*scale, 	(c.y_coord+.3)*scale, 	(c.y_coord)*scale, 		(c.y_coord+.3)*scale, 	(c.y_coord+.3)*scale,	(c.y_coord+.6)*scale,	(c.y_coord+.9)*scale, 	(c.y_coord+.7)*scale, 	(c.y_coord+.9)*scale,	(c.y_coord+.6)*scale};
+					gc.fillPolygon(x_sta, y_sta, 10);
+					gc.strokePolygon(x_sta, y_sta, 10);
+					break;
 			}
 		}
 		
