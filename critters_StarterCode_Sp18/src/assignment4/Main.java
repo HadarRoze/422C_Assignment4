@@ -145,15 +145,11 @@ public class Main extends Application{
 		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 6);
 		
-<<<<<<< HEAD
-		int scale = Critter.getScale();
-=======
 		Text error = new Text();
 		gridpane.add(error, 0, 7);
 		error.setText("");
-		
-		int scale = getScale();
->>>>>>> bbd067a382fbd680e0f84ddef0a14660f5d8813d
+		int scale = Critter.getScale();
+
 		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+300);
 		primaryStage.setScene(scene);
 		primaryStage.show();
