@@ -546,18 +546,18 @@ public abstract class Critter {
 	/**
 	 * Gets correct scaling property
 	 */
-	
-	private static int getScale() {
+	public static int getScale() {
 		int max_height = 700;
 		int max_width = 1600;
-		int scale = 1;
-		while(true) {
-			if((Params.world_height*scale>max_height)||(Params.world_width*scale>max_width)) {
-				break;
-			}
-			scale++;
+		int scaleH, scaleW;
+		
+		scaleH = max_height/Params.world_height;
+		scaleW = max_width/Params.world_width;
+		
+		if(scaleH > scaleW){
+			return scaleW;
 		}
-		return scale-1;
+		return scaleH;
 	}
 	
 	/**

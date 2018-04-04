@@ -145,7 +145,7 @@ public class Main extends Application{
 		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 6);
 		
-		int scale = getScale();
+		int scale = Critter.getScale();
 		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+300);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -338,19 +338,6 @@ public class Main extends Application{
 		}
     	return true;
     }
-	
-	private static int getScale() {
-		int max_height = 700;
-		int max_width = 1600;
-		int scale = 1;
-		while(true) {
-			if((Params.world_height*scale>max_height)||(Params.world_width*scale>max_width)) {
-				break;
-			}
-			scale++;
-		}
-		return scale-1;
-	}
 }
 
 
