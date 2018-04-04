@@ -418,9 +418,24 @@ public abstract class Critter {
 			switch(c.viewShape()) {
 			case SQUARE:
 				gc.fillRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
+				gc.strokeRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
+				break;
+			case CIRCLE:
+				gc.fillOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
+				gc.strokeOval(c.x_coord*scale, c.y_coord*scale, scale, scale);
 				break;
 			case TRIANGLE:
-				//gc.fill
+				double x_tri[] = {c.x_coord*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
+				double y_tri[] = {(c.y_coord+1)*scale, (c.y_coord+1)*scale, (c.y_coord)*scale};
+				gc.fillPolygon(x_tri, y_tri, 3);
+				gc.strokePolygon(x_tri, y_tri, 3);
+				break;
+			case DIAMOND:
+				double x_dia[] = {c.x_coord*scale, (c.x_coord+.5)*scale, (c.x_coord+1)*scale, (c.x_coord+.5)*scale};
+				double y_dia[] = {(c.y_coord+.5)*scale, c.y_coord*scale, (c.y_coord+.5)*scale, (c.y_coord+1)*scale};
+				gc.fillPolygon(x_dia, y_dia, 4);
+				gc.strokePolygon(x_dia, y_dia, 4);
+				break;
 			}
 		}
 		
