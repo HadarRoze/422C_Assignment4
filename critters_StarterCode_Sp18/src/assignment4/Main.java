@@ -181,6 +181,10 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.out.println("Seed Set: " + seed.getText());
+				String sd = seed.getText();
+				if(isInteger(sd)) {
+					Critter.setSeed(Integer.parseInt(sd));
+				}
 			}
 		});
 		
@@ -293,7 +297,7 @@ public class Main extends Application{
 				startAnimation.setDisable(true);
 				
 				int speed = (int) frame_choice.getValue();
-				KeyFrame animate = new KeyFrame(Duration.seconds(.05/speed), new EventHandler<ActionEvent>() {
+				KeyFrame animate = new KeyFrame(Duration.seconds(.5/speed), new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
 						Critter.worldTimeStep();
 						Critter.displayWorld(world);
