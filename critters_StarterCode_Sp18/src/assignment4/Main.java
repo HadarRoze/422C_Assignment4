@@ -28,6 +28,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 
 public class Main extends Application{
 	// getting package
@@ -141,10 +146,12 @@ public class Main extends Application{
 		gridpane.add(statsDisplay, 0, 6);
 		
 		int scale = getScale();
-		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+200);
+		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+300);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		Timeline t1 = new Timeline();
+		t1.setCycleCount(Animation.INDEFINITE);
 		// -----Controller
 		/**
 		 * Controller for "create" button, creates critter
@@ -286,17 +293,15 @@ public class Main extends Application{
 				startAnimation.setDisable(true);
 				
 				int speed = (int) frame_choice.getValue();
-				
-				while(true) {
-					for(int x = 0; x < speed; x++) {
+				KeyFrame animate = new KeyFrame(Duration.seconds(.05/speed), new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
 						Critter.worldTimeStep();
+						Critter.displayWorld(world);
 					}
-					if(!time_step.isDisable()) {
-						break;
-					}
-					// delay function goes here
-					Critter.displayWorld(world);
-				}
+				});
+				
+				t1.getKeyFrames().add(animate);
+				t1.play();
 			}
 		});
 		
@@ -310,6 +315,9 @@ public class Main extends Application{
 				statsDisplay.setDisable(false);
 				frame_choice.setDisable(false);
 				startAnimation.setDisable(false);
+				
+				t1.stop();
+				t1.getKeyFrames().clear();
 			}
 		});
 	}
