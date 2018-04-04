@@ -426,7 +426,7 @@ public abstract class Critter {
      * This method displays the critter's world
      */
 	public static void displayWorld(javafx.scene.layout.StackPane stackpane) {
-		int scale = 10;
+		int scale = getScale();
 		
 		javafx.scene.canvas.Canvas canvas = new javafx.scene.canvas.Canvas(Params.world_width*scale, Params.world_height*scale);
 		javafx.scene.canvas.GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -470,37 +470,19 @@ public abstract class Critter {
 		
 		stackpane.getChildren().clear();
 		stackpane.getChildren().add(canvas);
-		/*// Complete this method
-		// create parameters for the grid
-		int height = Params.world_height + 2;
-		int width = Params.world_width + 2;
-		boolean colEnd;
-		boolean rowEnd; // these will hold values of whether the current point is at the end of the world or not
-		String[][] viewedWorld = new String[height][width];
-		// go thru population and mark them on the map
-		for(Critter crit: population) {
-			viewedWorld[crit.y_coord+1][crit.x_coord+1] = crit.toString();
-		}
-		// go thru entire world, replace content if needed, and print
-		for(int y = 0; y < height; y++) {
-			for(int x = 0; x < width; x++) {
-				colEnd = ((x == 0)||(x == width-1));
-				rowEnd = ((y == 0)||(y == height-1)); // determine whether the point is on the borders of the world
-				
-				if(colEnd&&rowEnd) {
-					viewedWorld[y][x] = "+";
-				} else if(colEnd) {
-					viewedWorld[y][x] = "|";
-				} else if(rowEnd) {
-					viewedWorld[y][x] = "-";
-				} else if(viewedWorld[y][x] == null) { // i think this is the default but it might not be
-					viewedWorld[y][x] = " ";
-				}
-				System.out.print(viewedWorld[y][x]);
-			}
-			System.out.print("\n"); // did they mean print or just out? need to check this
-		}*/
 		
+	}
+	
+	/**
+	 * Gets correct scaling property
+	 */
+	
+	private static int getScale() {
+		if(Params.world_height>Params.world_width) {
+			
+		}
+		
+		return 5;
 	}
 	
 	/**

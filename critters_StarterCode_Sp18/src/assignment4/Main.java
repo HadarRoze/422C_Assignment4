@@ -134,7 +134,7 @@ public class Main extends Application{
 		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 5);
 		
-		Scene scene = new Scene(gridpane, 1600, 1010);
+		Scene scene = new Scene(gridpane, 1600, 900);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -179,6 +179,11 @@ public class Main extends Application{
 				String steps = num_steps.getText();
 				if(isInteger(steps)) {
 					System.out.println("Stepping " + steps + " times");
+					int stps = Integer.parseInt(steps);
+					for(int x = 0; x < stps; x++) {
+						Critter.worldTimeStep();
+					}
+					Critter.displayWorld(world);
 				}
 			}
 		});
@@ -190,6 +195,8 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.out.println("Stepping 1 time");
+				Critter.worldTimeStep();
+				Critter.displayWorld(world);
 			}
 		});
 		
@@ -200,6 +207,10 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.out.println("Stepping 10 time");
+				for(int x = 0; x < 10; x++) {
+					Critter.worldTimeStep();
+				}
+				Critter.displayWorld(world);
 			}
 		});
 		
@@ -210,6 +221,10 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.out.println("Stepping 100 time");
+				for(int x = 0; x < 100; x++) {
+					Critter.worldTimeStep();
+				}
+				Critter.displayWorld(world);
 			}
 		});
 		
@@ -220,6 +235,10 @@ public class Main extends Application{
 			@Override
 			public void handle(MouseEvent e) {
 				System.out.println("Stepping 1000 time");
+				for(int x = 0; x < 1000; x++) {
+					Critter.worldTimeStep();
+				}
+				Critter.displayWorld(world);
 			}
 		});
 		
