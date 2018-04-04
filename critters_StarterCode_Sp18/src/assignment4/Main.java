@@ -359,6 +359,18 @@ public class Main extends Application{
 		}
     	return true;
     }
+	
+	private static void StatRunner(String s) throws InvalidCritterException{
+    	try {
+    		Class<?> c = Class.forName(myPackage + "." + s);
+    		Method m = c.getMethod("runStats",java.util.List.class);
+    		java.util.List list = (java.util.List) Critter.getInstances(s);
+    		 m.invoke(c.newInstance(), list);
+    	}
+    	catch(Exception e) {
+    		throw new InvalidCritterException(myPackage + "." + s);
+    	}
+    }
 }
 
 
