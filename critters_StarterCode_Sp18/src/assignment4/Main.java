@@ -41,21 +41,23 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
-		final Canvas canvas = new Canvas(100,100);
+		/*final Canvas canvas = new Canvas(100,100);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.BLUE);
-		gc.fillRect(0,0,100,100);
+		gc.fillRect(0,0,100,100);*/
 		GridPane gridpane = new GridPane();
 		//GridPane gridpane = new GridPane();
 		
 		
 		// map of critters
-		gridpane.add(canvas,0,0);
+		StackPane world = new StackPane();
+		Critter.displayWorld(world); // remove once finished with testing?
+		gridpane.add(world,0,0);
 		
 		// ------Creation menu
 		// choicebox content
 		javafx.collections.ObservableList<String> c_types = FXCollections.observableArrayList();
-		c_types.addAll("Craig","Algea", "Trap", "Wild Card", "Zombie", "Spooked");
+		c_types.addAll("Craig","Algae", "Trap", "Wild Card", "Zombie", "Spooked");
 		javafx.collections.ObservableList<Integer> c_num = FXCollections.observableArrayList();
 		c_num.addAll(1,10,100);
 		
@@ -88,7 +90,7 @@ public class Main extends Application{
 		gridpane.add(time_step, 0, 2);
 		
 		
-		Scene scene = new Scene(gridpane, 400, 400);
+		Scene scene = new Scene(gridpane, 1600, 1000);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -108,7 +110,7 @@ public class Main extends Application{
     					}
     				}
     			catch (InvalidCritterException err) {} 
-				// call display world
+				Critter.displayWorld(world);
 			}
 		});
 		

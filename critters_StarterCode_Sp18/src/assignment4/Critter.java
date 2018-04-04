@@ -16,6 +16,8 @@ package assignment4;
 import java.awt.Canvas;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 /* see the PDF for descriptions of the methods and fields in this class
  * you may add fields, methods or inner classes to Critter ONLY if you make your additions private
  * no new public, protected or default-package code or data can be added to Critter
@@ -26,6 +28,7 @@ public abstract class Critter {
 	/*
 	 * PROJECT 5 ADDITIONS
 	 */
+	
 	public enum CritterShape {
 		CIRCLE,
 		SQUARE,
@@ -401,8 +404,29 @@ public abstract class Critter {
      * This method displays the critter's world
      */
 	public static void displayWorld(javafx.scene.layout.StackPane stackpane) {
+		int scale = 10;
+		
+		javafx.scene.canvas.Canvas canvas = new javafx.scene.canvas.Canvas(Params.world_width*scale, Params.world_height*scale);
+		javafx.scene.canvas.GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.setFill(Color.WHITE);
+		gc.fillRect(0, 0, Params.world_width*scale, Params.world_height*scale);
 		
 		
+		for(Critter c: population) {
+			gc.setFill(c.viewFillColor());
+			gc.setStroke(c.viewOutlineColor());
+			switch(c.viewShape()) {
+			case SQUARE:
+				gc.fillRect(c.x_coord*scale, c.y_coord*scale, scale, scale);
+				break;
+			case TRIANGLE:
+				//gc.fill
+			}
+		}
+		
+		
+		stackpane.getChildren().clear();
+		stackpane.getChildren().add(canvas);
 		/*// Complete this method
 		// create parameters for the grid
 		int height = Params.world_height + 2;
