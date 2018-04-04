@@ -425,7 +425,7 @@ public abstract class Critter {
 	/**
      * This method displays the critter's world
      */
-	public static void displayWorld(javafx.scene.layout.StackPane stackpane) {
+	public static void displayWorld(javafx.scene.layout.GridPane stackpane) {
 		int scale = getScale();
 		
 		javafx.scene.canvas.Canvas canvas = new javafx.scene.canvas.Canvas(Params.world_width*scale, Params.world_height*scale);
@@ -478,11 +478,16 @@ public abstract class Critter {
 	 */
 	
 	private static int getScale() {
-		if(Params.world_height>Params.world_width) {
-			
+		int max_height = 700;
+		int max_width = 1600;
+		int scale = 1;
+		while(true) {
+			if((Params.world_height*scale>max_height)||(Params.world_width*scale>max_width)) {
+				break;
+			}
+			scale++;
 		}
-		
-		return 5;
+		return scale-1;
 	}
 	
 	/**
