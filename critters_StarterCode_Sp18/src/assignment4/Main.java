@@ -326,6 +326,11 @@ public class Main extends Application{
 					public void handle(ActionEvent event) {
 						Critter.worldTimeStep();
 						Critter.displayWorld(world);
+						try {
+						    stats.setText(StatRunner(critter_types2.getText()));
+						} catch (InvalidCritterException e1) {
+						    error.setText("Error: Invalid Critter");
+						}
 					}
 				});
 				
