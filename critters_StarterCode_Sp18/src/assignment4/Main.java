@@ -145,7 +145,15 @@ public class Main extends Application{
 		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 6);
 		
+<<<<<<< HEAD
 		int scale = Critter.getScale();
+=======
+		Text error = new Text();
+		gridpane.add(error, 0, 7);
+		error.setText("");
+		
+		int scale = getScale();
+>>>>>>> bbd067a382fbd680e0f84ddef0a14660f5d8813d
 		Scene scene = new Scene(gridpane, Params.world_width*scale, Params.world_height*scale+300);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -159,6 +167,7 @@ public class Main extends Application{
 		create_critter.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				String sNum = (String) num_crit.getText();
 				if(isInteger(sNum)) {
 					String type = critter_types.getText();
@@ -168,8 +177,12 @@ public class Main extends Application{
 							Critter.makeCritter(myPackage + "." + type);
 						}
 					}
-					catch (InvalidCritterException err) {} 
+					catch (InvalidCritterException err) {
+						error.setText("Error: Invalid value(s) for creating a critter");
+					} 
 					Critter.displayWorld(world);
+				} else {
+					error.setText("Error: Invalid value(s) for creating a critter");
 				}
 			}
 		});
@@ -180,10 +193,13 @@ public class Main extends Application{
 		setSeed.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				System.out.println("Seed Set: " + seed.getText());
 				String sd = seed.getText();
 				if(isInteger(sd)) {
 					Critter.setSeed(Integer.parseInt(sd));
+				} else {
+					error.setText("Error: Invalid value for setting a seed");
 				}
 			}
 		});
@@ -194,6 +210,7 @@ public class Main extends Application{
 		step.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				String steps = num_steps.getText();
 				if(isInteger(steps)) {
 					System.out.println("Stepping " + steps + " times");
@@ -202,6 +219,8 @@ public class Main extends Application{
 						Critter.worldTimeStep();
 					}
 					Critter.displayWorld(world);
+				} else {
+					error.setText("Error: Invalid value for time step");
 				}
 			}
 		});
@@ -212,6 +231,7 @@ public class Main extends Application{
 		time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				System.out.println("Stepping 1 time");
 				Critter.worldTimeStep();
 				Critter.displayWorld(world);
@@ -224,6 +244,7 @@ public class Main extends Application{
 		time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				System.out.println("Stepping 10 time");
 				for(int x = 0; x < 10; x++) {
 					Critter.worldTimeStep();
@@ -238,6 +259,7 @@ public class Main extends Application{
 		time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				System.out.println("Stepping 100 time");
 				for(int x = 0; x < 100; x++) {
 					Critter.worldTimeStep();
@@ -252,6 +274,7 @@ public class Main extends Application{
 		time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				System.out.println("Stepping 1000 time");
 				for(int x = 0; x < 1000; x++) {
 					Critter.worldTimeStep();
@@ -266,6 +289,7 @@ public class Main extends Application{
 		run.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				String name = critter_types2.getText();
 				stats.setText("Running Stats for " + name);
 			}
@@ -287,6 +311,7 @@ public class Main extends Application{
 		startAnimation.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
+				error.setText("");
 				// disable all controls other than 'Stop Animation'
 				creation.setDisable(true);
 				time_step.setDisable(true);
