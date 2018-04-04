@@ -27,6 +27,7 @@ import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
+import javafx.scene.text.Text;
 
 public class Main extends Application{
 	// getting package
@@ -80,7 +81,7 @@ public class Main extends Application{
 		num_crit.setPrefWidth(150);
 		creation.add(num_crit, 3, 1);
 		Button create_critter = new Button("Create");
-		creation.add(create_critter, 0, 2);
+		creation.add(create_critter, 4, 1);
 		gridpane.add(creation, 0,1);
 		
 		// time step
@@ -109,8 +110,25 @@ public class Main extends Application{
 		step_butts.add(time_step_1000, 4, 0);
 		gridpane.add(step_butts, 0, 3);
 		
+		GridPane RunStats = new GridPane();
+		RunStats.add(new Label(""), 0, 0);
+		RunStats.add(new Label("Run Stats"), 0, 1);
+		RunStats.add(new Label("Critter: "), 0, 2);
+		TextField critter_types2 = new TextField();
+		critter_types2.setPromptText("Enter Critter Type");
+		critter_types2.setPrefWidth(150);
+		Button run = new Button("Manual Run Stats");
+		RunStats.add(critter_types2, 1, 2);
+		RunStats.add(run, 2,2);
+		gridpane.add(RunStats, 0, 4);
 		
-		Scene scene = new Scene(gridpane, 1600, 1000);
+		GridPane statsDisplay = new GridPane();
+		Text stats = new Text();
+		stats.setText("Stats will be displayed here");
+		statsDisplay.add(stats, 0, 0);
+		gridpane.add(statsDisplay, 0, 5);
+		
+		Scene scene = new Scene(gridpane, 1600, 1005);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -127,7 +145,6 @@ public class Main extends Application{
 					int num = Integer.parseInt(sNum);
 					try {
 						for(int i = 0; i < num; i++) {
-							System.out.println(myPackage + "." + type);
 							Critter.makeCritter(myPackage + "." + type);
 						}
 					}
@@ -156,7 +173,7 @@ public class Main extends Application{
 		time_step_1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
-				
+				System.out.println("Stepping 1 time");
 			}
 		});
 		
@@ -166,7 +183,7 @@ public class Main extends Application{
 		time_step_10.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
-				
+				System.out.println("Stepping 10 time");
 			}
 		});
 		
@@ -176,7 +193,7 @@ public class Main extends Application{
 		time_step_100.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
-				
+				System.out.println("Stepping 100 time");
 			}
 		});
 		
@@ -186,7 +203,18 @@ public class Main extends Application{
 		time_step_1000.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
-				
+				System.out.println("Stepping 1000 time");
+			}
+		});
+		
+		/**
+		 * Controller for "Manual Run Stats" button, displays stats
+		 */
+		run.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				String name = critter_types2.getText();
+				stats.setText("Running Stats for " + name);
 			}
 		});
 	}
