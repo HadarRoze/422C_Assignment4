@@ -287,7 +287,11 @@ public class Main extends Application{
 			public void handle(MouseEvent e) {
 				error.setText("");
 				String name = critter_types2.getText();
-				stats.setText("Running Stats for " + name);
+				try {
+					stats.setText(StatRunner(name));
+				} catch (InvalidCritterException e1) {
+					error.setText("Error: Invalid Critter");
+				}
 			}
 		});
 		
@@ -360,14 +364,16 @@ public class Main extends Application{
     	return true;
     }
 	
-	private static void StatRunner(String s) throws InvalidCritterException{
+	private static String StatRunner(String s) throws InvalidCritterException{
     	try {
     		Class<?> c = Class.forName(myPackage + "." + s);
     		Method m = c.getMethod("runStats",java.util.List.class);
     		java.util.List list = (java.util.List) Critter.getInstances(s);
-    		 m.invoke(c.newInstance(), list);
+    		String stats = (String) m.invoke(c.newInstance(), list);
+    		return stats;
     	}
     	catch(Exception e) {
+    		System.out.println("Stat Runner Failed");
     		throw new InvalidCritterException(myPackage + "." + s);
     	}
     }
