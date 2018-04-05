@@ -30,7 +30,7 @@ public class Zombie extends Critter{
      * This method simulates what the critter does during a time step
      */
 	public void doTimeStep() { 
-		if(prev_energy < getEnergy()) {
+		if((prev_energy < getEnergy())&&(prev_energy!=0)) {
 			Zombie babe = new Zombie();
 			reproduce(babe, getRandomInt(8));
 		} else {
