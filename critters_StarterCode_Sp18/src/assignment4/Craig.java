@@ -54,6 +54,7 @@ public class Craig extends Critter {
 		assert(turn < 8);
 		
 		dir = (dir + turn) % 8;
+		System.out.println(getEnergy());
 	}
 
 	public static String runStats(java.util.List<Critter> craigs) {

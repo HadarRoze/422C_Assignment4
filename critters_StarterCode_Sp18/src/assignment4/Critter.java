@@ -266,6 +266,7 @@ public abstract class Critter {
 								
 				default: break;																					//If invalid, do nothing
 			}
+			energy -= cost;
 		}		
 	}
 	/**
