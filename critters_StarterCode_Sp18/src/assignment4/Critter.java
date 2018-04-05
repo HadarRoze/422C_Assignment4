@@ -586,7 +586,7 @@ public abstract class Critter {
 					// fix location if needed
 					population.get(first).validateMovement();
 					population.get(second).validateMovement();
-					if((population.get(first).getEnergy()<=0)&&(shouldEncounter(population.get(first), population.get(second)))) { // if both are alive and in the same spot
+					if((population.get(first).getEnergy()>=0)&&(shouldEncounter(population.get(first), population.get(second)))) { // if both are alive and in the same spot
 						int first_roll = 0;
 						int second_roll = 0;
 						if(firstFight) {
@@ -616,7 +616,7 @@ public abstract class Critter {
 	private static boolean shouldEncounter(Critter c1, Critter c2) {
 		// method to determine if an encounter should happen or not
 		// mostly needed to reduce "wordiness" in processEncounters 
-		if((c1.x_coord==c2.x_coord)&&(c1.y_coord==c2.y_coord)&&(c2.getEnergy()<=0)) { // same location and second critter isn't dead (expected that critter 1 is alive)
+		if((c1.x_coord==c2.x_coord)&&(c1.y_coord==c2.y_coord)&&(c2.getEnergy()>0)) { // same location and second critter isn't dead (expected that critter 1 is alive)
 			return true;
 		}
 		return false;
