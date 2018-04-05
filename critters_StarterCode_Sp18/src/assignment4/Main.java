@@ -45,6 +45,10 @@ public class Main extends Application{
 		launch(args);
 	}
 	
+	/**
+	 * Starts the critter simulation
+	 * @param Stage primaryState - the stage to display on
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		GridPane gridpane = new GridPane();
@@ -96,7 +100,6 @@ public class Main extends Application{
 		time_step.add(step, 2, 2);
 		gridpane.add(time_step, 0, 2);
 		
-		
 	 	GridPane step_butts = new GridPane();
 	 	step_butts.add(new Label("Quick steps:        "), 0, 0);
 		Button time_step_1 = new Button("1");															
@@ -109,6 +112,7 @@ public class Main extends Application{
 		step_butts.add(time_step_1000, 4, 0);
 		gridpane.add(step_butts, 0, 3);
 		
+		// animation
 		GridPane animation = new GridPane();
 		javafx.collections.ObservableList<Integer> ts_sizes = FXCollections.observableArrayList();		// Use text field instead of choice box
 		ts_sizes.addAll(1,2,5,10,20,50,100);
@@ -123,7 +127,7 @@ public class Main extends Application{
 		animation.add(stopAnimation, 3, 1);
 		gridpane.add(animation, 0, 4);
 		
-		
+		// runs stats
 		GridPane RunStats = new GridPane();
 		RunStats.add(new Label(""), 0, 0);
 		RunStats.add(new Label("Run Stats"), 0, 1);
@@ -139,12 +143,13 @@ public class Main extends Application{
 		GridPane statsDisplay = new GridPane();
 		Text stats = new Text();
 		stats.setText("Stats will be displayed here");
-		stats.setWrappingWidth(1560);
+		stats.setWrappingWidth(1000);
 		statsDisplay.add(stats, 0, 0);
 		Button quitter = new Button("Quit");
 		statsDisplay.add(quitter, 1, 0);
 		gridpane.add(statsDisplay, 0, 6);
 		
+		// error feedback
 		Text error = new Text();
 		gridpane.add(error, 0, 7);
 		error.setText("");
@@ -156,6 +161,7 @@ public class Main extends Application{
 		
 		Timeline t1 = new Timeline();
 		t1.setCycleCount(Animation.INDEFINITE);
+		
 		// -----Controller
 		/**
 		 * Controller for "create" button, creates critter
@@ -306,7 +312,7 @@ public class Main extends Application{
 		});
 		
 		/**
-		 * 
+		 * Controller for "Start Animation", starts the animation
 		 */
 		startAnimation.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -339,6 +345,9 @@ public class Main extends Application{
 			}
 		});
 		
+		/**
+		 * Controller for "Stop Animation", stops the animation
+		 */
 		stopAnimation.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent e) {
@@ -356,6 +365,11 @@ public class Main extends Application{
 		});
 	}
 	
+	/**
+	 * Returns whether a string is an integer or not
+	 * @param String s - string to check
+	 * @return boolean - is the string an integer
+	 */
 	private static boolean isInteger(String s) {
 		try {
 			Integer.parseInt(s);
@@ -369,6 +383,11 @@ public class Main extends Application{
     	return true;
     }
 	
+	/**
+	 * Returns stats of a critter
+	 * @param String s - critter name
+	 * @return String - a critter's stats
+	 */
 	private static String StatRunner(String s) throws InvalidCritterException{
     	try {
     		Class<?> c = Class.forName(myPackage + "." + s);

@@ -73,6 +73,12 @@ public abstract class Critter {
 		myPackage = Critter.class.getPackage().toString().split(" ")[1];
 	}
 	
+	/**
+     * Simulates the critter looking around
+     * @param int direction - the direction of movement (0-7 corresponds to radian circle)
+     * @param int steps - distance to move (false - 2, true - 1)
+     * @return String - returns toString() of the critter looked at
+     */
 	// NEW FOR PROJECT 5
 	protected final String look(int direction, boolean steps) {
 		// assuming critter has enough energy to do this
@@ -497,6 +503,7 @@ public abstract class Critter {
 	
 	/**
      * This method displays the critter's world
+     * @param GridPane stackpane - gridpane to display on
      */
 	public static void displayWorld(javafx.scene.layout.GridPane stackpane) {
 		int scale = getScale();
@@ -548,6 +555,7 @@ public abstract class Critter {
 	
 	/**
 	 * Gets correct scaling property
+	 * @return int - the number to scale the critter screen to
 	 */
 	public static int getScale() {
 		int max_height = 700;
@@ -612,6 +620,7 @@ public abstract class Critter {
      * This method processes whether an encounter even happens
      * @param Critter c1 - a critter
      * @param Critter c2 - a critter
+     * @return boolean - whether the critters should have an encounter
      */
 	private static boolean shouldEncounter(Critter c1, Critter c2) {
 		// method to determine if an encounter should happen or not
@@ -655,8 +664,8 @@ public abstract class Critter {
 	
 	/**
 	 * Looks for critter in location (x,y)
-	 * @param x x coords 
-	 * @param y y coords
+	 * @param x - x coords 
+	 * @param y - y coords
 	 * @return Critter in location (x,y) or null if none. 
 	 */
 	private Critter critterInLoc(int x, int y) {
